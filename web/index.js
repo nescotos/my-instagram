@@ -12,13 +12,16 @@ app.use(bodyParser.json());
 // app.use(express.static(__dirname + '/node_modules'));
 app.use(express.static(__dirname));
 //Setting up morgan to log every request
-app.use(morgan('env'));
+app.use(morgan('dev'));
 //Connecting to database
 mongoose.connect(config.DATABASE);
 //Giving the root of webpage
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
+//User Authentication Endpoint
+var authApi = require('./server/routes/authApi')(express);
+app.use(authApi);
 //Listen
 app.listen(config.PORT, function(){
   console.log('Server Running on: ' + config.PORT);

@@ -6,7 +6,7 @@ var validator = require('node-mongoose-validator');
 var userSchema = new Schema({
   email : {type: String, required: true, index: {unique: true}},
   name : {type: String, required: true},
-  username : {type: String, required: true},
+  username : {type: String, required: true, index: {unique: true}},
   password : {type: String, required: true, select: false },
   //DON'T DO THIS IF YOU HAVE A LOT OF DATA EMBEDDED IN THE ARRAY!!!
   followers : [{type: Schema.Types.ObjectId, ref : 'User'}],
