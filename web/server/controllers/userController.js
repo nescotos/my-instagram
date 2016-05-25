@@ -26,10 +26,11 @@ module.exports = {
           	      } else {
           	        //If user is found and password is right create Token
           	        var token = jwt.sign({
-          	        	name: user.name,
+          	        	id: user._id,
           	        	username: user.username
           	        }, superSecret, {
-          	          expiresIn: 60 * 60 * 24 // expires in 24 hours
+                      //Expires in 24 hours
+          	          expiresIn: 60 * 60 * 24
           	        });
           	        //Return the information including token as JSON
           	        res.json({

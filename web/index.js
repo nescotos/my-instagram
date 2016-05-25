@@ -22,6 +22,12 @@ app.get('/', function(req, res){
 //User Authentication Endpoint
 var authApi = require('./server/routes/authApi')(express);
 app.use(authApi);
+//Photos Endpoint
+var photoApi = require('./server/routes/photoApi')(express);
+app.use('/api/v1', photoApi);
+//Follow Endpoint
+var followApi = require('./server/routes/followApi')(express);
+app.use('/api/v1', followApi);
 //Listen
 app.listen(config.PORT, function(){
   console.log('Server Running on: ' + config.PORT);
