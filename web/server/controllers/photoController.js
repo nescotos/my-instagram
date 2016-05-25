@@ -14,6 +14,8 @@ module.exports = {
               if(req.body.description){
                 photo.description = req.body.description;
               }
+              console.log(req.decoded);
+              photo.owner = req.decoded.id;
               photo.save(function(err){
                 if(err){
                   res.json({success: false, error: 'Ooops'});
@@ -48,13 +50,7 @@ module.exports = {
                   });
                 },
     getAllPhotosByUser : function(req, res){
-                  User.find({_id : req.decoded.id}, function(err, user){
-                    if(err){
-                      console.log(err);
-                      res.json({success: false, error: 'Ooops'});
-                    }else{
-                      var photosId = user[0].photos;
-                      Photo.find({_id : {$in : photosId}}, function(err, photos){
+                      Photo.find({owner : req.decoded.id}, function(err, photos){
                         if(err){
                           console.log(err);
                           res.json({success: false, error: 'Ooops'});
@@ -62,7 +58,29 @@ module.exports = {
                           res.json(photos);
                         }
                       });
-                    }
-                  })
-                }
+                },
+    deletePhoto : function(req, res, id){
+                    //Check if users are equals
+                    var ownerId;
+                    Photo.find({_id : id}, function(err, photo){
+                      if(err){
+                        console.log(err);
+                        res.json({success : false});
+                      }else{
+                        ownerId = photo[0].owner;
+                        if(ownerId == req.decoded.id){
+                          User.update({_id : req.decoded.id}, {$pull : {photos : id}}, function(err){
+                            if(err){
+                              console.log(err);
+                              res.json({success: false, error: 'Ooops'});
+                            }else{
+                              res.json({succes: true, message : 'Photo deleted!'});
+                            }
+                          });
+                        }else{
+                          res.status(403).json({message : 'FORBIDDEN'});
+                        }
+                      }
+                    });
+                  }
 }

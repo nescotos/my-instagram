@@ -6,6 +6,10 @@ module.exports = function(express){
   .get(function(req, res){
     var id = req.params.id;
     PhotoController.getImage(req, res, id);
+  })
+  .delete(function(req, res){
+    var id = req.params.id;
+    PhotoController.deletePhoto(req, res, id);
   });
 
   photoApi.route('/photo/like/:id')
