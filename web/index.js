@@ -28,6 +28,9 @@ app.use('/api/v1', photoApi);
 //Follow Endpoint
 var followApi = require('./server/routes/followApi')(express);
 app.use('/api/v1', followApi);
+//Comment Endpoint
+var commentApi = require('./server/routes/commentApi')(express);
+app.use('/api/v1', commentApi);
 //Listen
 app.listen(config.PORT, function(){
   console.log('Server Running on: ' + config.PORT);

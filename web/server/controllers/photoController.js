@@ -36,5 +36,33 @@ module.exports = {
                   });
                 }
               });
-            }
+            },
+    likePhoto : function(req, res, id){
+                  Photo.update({_id : id}, {$push : {likes : req.decoded.id}}, function(err){
+                    if(err){
+                      console.log(err);
+                      res.json({success: false, error: 'Ooops'});
+                    }else{
+                      res.json({success: true, message: 'Like done!'})
+                    }
+                  });
+                },
+    getAllPhotosByUser : function(req, res){
+                  User.find({_id : req.decoded.id}, function(err, user){
+                    if(err){
+                      console.log(err);
+                      res.json({success: false, error: 'Ooops'});
+                    }else{
+                      var photosId = user[0].photos;
+                      Photo.find({_id : {$in : photosId}}, function(err, photos){
+                        if(err){
+                          console.log(err);
+                          res.json({success: false, error: 'Ooops'});
+                        }else{
+                          res.json(photos);
+                        }
+                      });
+                    }
+                  })
+                }
 }

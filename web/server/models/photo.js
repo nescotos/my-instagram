@@ -3,9 +3,9 @@ var Schema = mongoose.Schema;
 
 var photoSchema = new Schema({
   createdAt : {type: Date, required: true, default: Date.now},
-  likes : {type: Number, required: true, default: 0},
+  likes : [{type: Schema.Types.ObjectId, ref : 'User'}],
   description : {type: String},
-  comments : [{type: Schema.Types.ObjectId, ref : 'Comments'}]
+  comments : [{type: Schema.Types.ObjectId, ref : 'Comment'}]
 });
 
 module.exports = mongoose.model('Photo', photoSchema);
