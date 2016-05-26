@@ -9,20 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var home_component_1 = require('./home.component');
-var login_component_1 = require('./login.component');
-var App = (function () {
-    function App() {
+var LoginComponent = (function () {
+    function LoginComponent() {
     }
-    App = __decorate([
+    LoginComponent = __decorate([
         core_1.Component({
-            selector: 'my-instagram',
-            template: '<login-component></login-component>',
-            directives: [home_component_1.HomeComponent, login_component_1.LoginComponent]
+            selector: 'login-component',
+            templateUrl: 'public/pages/user/login.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], App);
-    return App;
+    ], LoginComponent);
+    return LoginComponent;
 }());
-exports.App = App;
-//# sourceMappingURL=app.component.js.map
+exports.LoginComponent = LoginComponent;
+//# sourceMappingURL=login.component.js.map
