@@ -1,4 +1,4 @@
-y avar jwt = require('jsonwebtoken');
+jwt = require('jsonwebtoken');
 var config = require('../../config');
 var superSecret = config.SUPERSECRET;
 var User = require('../models/user');

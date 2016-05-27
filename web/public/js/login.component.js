@@ -9,15 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var user_services_1 = require('./services/user.services');
 var LoginComponent = (function () {
-    function LoginComponent() {
+    function LoginComponent(userService) {
+        this.userService = userService;
+        this.username = "";
+        this.password = "";
     }
+    LoginComponent.prototype.doLogin = function () {
+        this.userService.login(this.username, this.password)
+            .subscribe(function (token) {
+            if (token) {
+                //Logic to store token
+                alert('Succesful');
+                window.localStorage.setItem('token', token['token']);
+            }
+        }, function (error) {
+            alert('Error');
+        });
+    };
     LoginComponent = __decorate([
         core_1.Component({
             selector: 'login-component',
-            templateUrl: 'public/pages/user/login.component.html'
+            templateUrl: 'public/pages/user/login.component.html',
+            providers: [user_services_1.UserService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [user_services_1.UserService])
     ], LoginComponent);
     return LoginComponent;
 }());
