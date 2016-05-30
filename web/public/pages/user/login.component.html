@@ -25,7 +25,9 @@
           </div>
         </div>
       </fieldset>
-      {{password}} | {{username}}
+      <div style="color:red;" *ngIf="error">
+        {{error}}
+      </div>
     </form>
   </div>
   <div class="tab-pane fade" id="signup">

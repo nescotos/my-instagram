@@ -30,11 +30,19 @@ var UserService = (function () {
                     console.error('Brutal error');
                 }
                 else {
-                    console.log(res);
                     observable.next(res);
                 }
             });
         });
+    };
+    UserService.prototype.logout = function () {
+        window.localStorage.removeItem("token");
+    };
+    UserService.prototype.isAuth = function () {
+        if (window.localStorage.getItem("token")) {
+            return true;
+        }
+        return false;
     };
     UserService = __decorate([
         core_1.Injectable(), 

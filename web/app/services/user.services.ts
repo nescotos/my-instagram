@@ -20,10 +20,20 @@ export class UserService {
         if(res.code == "404" || res.code == "500"){
           console.error('Brutal error');
         }else{
-          console.log(res);
           observable.next(res);
         }
       })
     })
+  }
+
+  logout(){
+    window.localStorage.removeItem("token");
+  }
+
+  isAuth(){
+    if(window.localStorage.getItem("token")){
+      return true;
+    }
+    return false;
   }
 }

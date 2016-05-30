@@ -11,16 +11,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var home_component_1 = require('./home.component');
 var login_component_1 = require('./login.component');
+var user_services_1 = require('./services/user.services');
+var router_deprecated_1 = require('@angular/router-deprecated');
 var App = (function () {
-    function App() {
+    function App(userService, router) {
+        this.userService = userService;
+        this.router = router;
     }
+    App.prototype.ngOnInit = function () {
+        //Check if user is auth
+        if (this.userService.isAuth()) {
+            this.router.navigate(['Home']);
+        }
+        else {
+            this.router.navigate(['Login']);
+        }
+    };
+    App.prototype.isAuth = function () {
+        return this.userService.isAuth();
+    };
     App = __decorate([
         core_1.Component({
             selector: 'my-instagram',
-            template: '<login-component></login-component>',
-            directives: [home_component_1.HomeComponent, login_component_1.LoginComponent]
-        }), 
-        __metadata('design:paramtypes', [])
+            template: '<router-outlet></router-outlet>',
+            directives: [router_deprecated_1.RouterOutlet, home_component_1.HomeComponent, login_component_1.LoginComponent],
+            providers: [user_services_1.UserService]
+        }),
+        router_deprecated_1.RouteConfig([
+            { path: '/', name: "Home", component: home_component_1.HomeComponent, useAsDefault: true },
+            { path: '/login', name: "Login", component: login_component_1.LoginComponent }
+        ]), 
+        __metadata('design:paramtypes', [user_services_1.UserService, router_deprecated_1.Router])
     ], App);
     return App;
 }());
