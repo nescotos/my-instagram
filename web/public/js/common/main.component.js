@@ -9,24 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var header_component_1 = require('./common/header.component');
-var main_component_1 = require('./common/main.component');
-var router_deprecated_1 = require('@angular/router-deprecated');
-var HomeComponent = (function () {
-    function HomeComponent() {
+var MainComponent = (function () {
+    function MainComponent() {
     }
-    HomeComponent = __decorate([
+    MainComponent = __decorate([
         core_1.Component({
-            selector: 'home-component',
-            template: "\n    <header-component></header-component>\n    <div class=\"jumbotron\">\n      <router-outlet></router-outlet>\n    </div>\n  ",
-            directives: [header_component_1.HeaderComponent, router_deprecated_1.RouterOutlet]
-        }),
-        router_deprecated_1.RouteConfig([
-            { path: '/', name: "Main", component: main_component_1.MainComponent, useAsDefault: true },
-        ]), 
+            selector: 'main-component',
+            templateUrl: 'public/pages/common/main.component.html',
+        }), 
         __metadata('design:paramtypes', [])
-    ], HomeComponent);
-    return HomeComponent;
+    ], MainComponent);
+    return MainComponent;
 }());
-exports.HomeComponent = HomeComponent;
-//# sourceMappingURL=home.component.js.map
+exports.MainComponent = MainComponent;
+//# sourceMappingURL=main.component.js.map

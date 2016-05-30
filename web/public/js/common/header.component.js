@@ -24,6 +24,7 @@ var HeaderComponent = (function () {
         core_1.Component({
             selector: 'header-component',
             templateUrl: 'public/pages/common/header.component.html',
+            directives: [router_deprecated_1.RouterLink],
             providers: [user_services_1.UserService]
         }), 
         __metadata('design:paramtypes', [user_services_1.UserService, router_deprecated_1.Router])

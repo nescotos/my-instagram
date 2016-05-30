@@ -38,7 +38,7 @@ var App = (function () {
             providers: [user_services_1.UserService]
         }),
         router_deprecated_1.RouteConfig([
-            { path: '/', name: "Home", component: home_component_1.HomeComponent, useAsDefault: true },
+            { path: '...', name: "Home", component: home_component_1.HomeComponent, useAsDefault: true },
             { path: '/login', name: "Login", component: login_component_1.LoginComponent }
         ]), 
         __metadata('design:paramtypes', [user_services_1.UserService, router_deprecated_1.Router])

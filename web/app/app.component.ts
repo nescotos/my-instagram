@@ -12,7 +12,7 @@ import {RouteConfig, RouterOutlet, Router} from '@angular/router-deprecated';
 })
 
 @RouteConfig([
-    { path: '/', name: "Home", component: HomeComponent, useAsDefault : true},
+    { path: '...', name: "Home", component: HomeComponent, useAsDefault : true},
     { path: '/login', name: "Login", component: LoginComponent}
 ])
 
