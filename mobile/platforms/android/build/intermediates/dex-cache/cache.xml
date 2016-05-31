@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/opt/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/23.3.0/support-annotations-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="/home/nestor/Escritorio/my-instagram/mobile/platforms/android/build/intermediates/pre-dexed/F0/debug/support-annotations-23.3.0_19b29d545cf39be7364c2450f93081be19755ad9.jar" />
+    </item>
+    <item
+        jar="/home/nestor/Escritorio/my-instagram/mobile/platforms/android/libs/nativescript.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="57b3fa4e07f606555cab1d8373106c80acd79f64">
+        <dex dex="/home/nestor/Escritorio/my-instagram/mobile/platforms/android/build/intermediates/pre-dexed/F0/debug/nativescript_cfb9299b6a1dcf014013b10e87f2d8fe7c04375d.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,8 @@
+<StackLayout>
+    <Label text="Tap the button" class="title"></Label>
+
+    <Button text="Go to Login" (tap)="goLogin()"></Button>
+    <Button text="Get Token" (tap)="getToken()" style="background-color:#609000;"></Button>
+    <TextField hint="Username" [(ngModel)]="description" autocorrect="false" autocapitalizationType="none"></TextField>
+    <Button text="Take Photo" (tap)="takePhoto()" style="background-color:#609000;"></Button>
+</StackLayout>

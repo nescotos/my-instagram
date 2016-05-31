@@ -1,0 +1,24 @@
+﻿button, label, stack-layout {
+    horizontal-align: center;
+}
+
+button {
+    background-color: #D02E8A;
+}
+
+.title {
+    font-size: 30;
+    margin: 20;
+}
+
+.message {
+    font-size: 20;
+    color: #284848;
+    text-align: center;
+    margin: 0 20;
+}
+
+Page {
+  background-color: #242424;
+  color: white;
+}

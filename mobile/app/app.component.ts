@@ -1,29 +1,23 @@
 import {Component} from "@angular/core";
-
+import {RouteConfig, RouterOutlet, Router} from '@angular/router-deprecated';
+import {NS_ROUTER_DIRECTIVES} from "nativescript-angular/router";
+import {Page} from "ui/page";
+import {HomeComponent} from './home.component';
+import {LoginComponent} from './views/login/login.component';
 @Component({
     selector: "my-app",
-    template: `
-<StackLayout>
-    <Label text="Tap the button" class="title"></Label>
-    
-    <Button text="TAP" (tap)="onTap()"></Button>
-
-    <Label [text]="message" class="message" textWrap="true"></Label>
-</StackLayout>
-`,
+    templateUrl: './views/app.component.html',
+    directives: [RouterOutlet, HomeComponent, LoginComponent, NS_ROUTER_DIRECTIVES]
 })
-export class AppComponent {
-    public counter: number = 16;
 
-    public get message(): string {
-        if (this.counter > 0) {
-            return this.counter + " taps left";
-        } else {
-            return "Hoorraaay! \nYou are ready to start building!";
-        }
-    }
-    
-    public onTap() {
-        this.counter--;
+@RouteConfig([
+    { path: '/', name: "Home", component: HomeComponent},
+    { path: '/login', name: "Login", component: LoginComponent, useAsDefault : true}
+])
+
+export class AppComponent {
+
+    constructor(page: Page) {
+        page.actionBarHidden = true;
     }
 }
