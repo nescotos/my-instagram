@@ -64,5 +64,16 @@ module.exports = {
         				//Return a message
         				res.json({ message: 'User created succesfully.' });
         			});
+            },
+  me : function(req, res){
+              //Retrieving the user
+              User.findById(req.decoded.id, function(err, user){
+                if(err){
+                  res.json({success: false, message: 'Error ocurred'});
+                }else{
+                  //Sending user.
+                  res.json(user);
+                }
+              })
             }
 }

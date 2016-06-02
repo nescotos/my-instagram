@@ -1,26 +1,28 @@
-<div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-md-6">
-            Username
-            <img class = "circle-avatar" src="http://www.dialogomu.com/wp-content/uploads/2015/01/PROFILE-PIC-leadersinheels.jpg"/>
-          </div>
-          <div class="col-md-6 text-right">
-            An hour ago!
-          </div>
+<div *ngFor="let photo of photos">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Username
+                            <img class="circle-avatar" src="http://www.dialogomu.com/wp-content/uploads/2015/01/PROFILE-PIC-leadersinheels.jpg" />
+                        </div>
+                        <div class="col-md-6 text-right">
+                            An hour ago!
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <img class="img-rounded img-responsive center-block" src="/photo/{{photo['_id']}}" />
+                </div>
+                <div class="panel-footer">
+                    <i class="glyphicon glyphicon-resize-full"></i>&nbsp;&nbsp;
+                    <i class="glyphicon glyphicon-heart"></i>&nbsp; 8 &nbsp;&nbsp;&nbsp;
+                    <i class="glyphicon glyphicon-comment"></i>&nbsp; 12
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="panel-body">
-        <img class="img-rounded img-responsive center-block" src="http://vignette3.wikia.nocookie.net/thecornerclub/images/e/e1/Blast_500x500-1-.jpg/revision/latest?cb=20150213022400"/>
-      </div>
-      <div class="panel-footer">
-        <i class="glyphicon glyphicon-resize-full"></i>&nbsp;&nbsp;
-        <i class="glyphicon glyphicon-heart"></i>&nbsp; 8 &nbsp;&nbsp;&nbsp;
-        <i class="glyphicon glyphicon-comment"></i>&nbsp; 12
-      </div>
     </div>
-  </div>
 </div>

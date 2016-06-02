@@ -26,5 +26,10 @@ module.exports = function(express) {
             PhotoController.getAllPhotosByUser(req, res);
         });
 
+      photoApi.route('/photos')
+        .get(function(req, res){
+          PhotoController.getAllPhotosByWall(req, res);
+        })
+
     return photoApi;
 }

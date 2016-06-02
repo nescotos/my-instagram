@@ -9,15 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var photos_services_1 = require('../services/photos.services');
 var MainComponent = (function () {
-    function MainComponent() {
+    function MainComponent(photoService) {
+        this.photoService = photoService;
     }
+    MainComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.photoService.getAllPhotosByWall()
+            .subscribe(function (photos) {
+            if (photos) {
+                _this.photos = photos;
+            }
+        }, function (error) {
+            alert('Error');
+        });
+    };
     MainComponent = __decorate([
         core_1.Component({
             selector: 'main-component',
             templateUrl: 'public/pages/common/main.component.html',
+            providers: [photos_services_1.PhotoService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [photos_services_1.PhotoService])
     ], MainComponent);
     return MainComponent;
 }());

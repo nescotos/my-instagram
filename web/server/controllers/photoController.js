@@ -82,5 +82,28 @@ module.exports = {
                         }
                       }
                     });
+                  },
+      getAllPhotosByWall : function(req, res){
+                    //Getting id's from following
+                    User.findById(req.decoded.id, function(err, user){
+                      if(err){
+                        res.json({success : false, message : 'Oooops, error; try again later'});
+                      }else{
+                        var arrayId = [];
+                        if(user.following){
+                          arrayId = user.following;
+                        }
+                        //Pushing the user id
+                        arrayId.push(req.decoded.id);
+                        //Query for retrive photos
+                        Photo.find({owner : {$in : arrayId}}).sort({createdAt: -1}).exec(function(err, photos){
+                          if(err){
+                            res.json({success : false, message : 'Ooops'});
+                          }else{
+                            res.json(photos);
+                          }
+                        })
+                      }
+                    })
                   }
 }

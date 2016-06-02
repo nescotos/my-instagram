@@ -1,4 +1,5 @@
 var UserController = require('../controllers/userController');
+var PhotoController = require('../controllers/photoController');
 var jwt = require('jsonwebtoken');
 var config = require('../../config');
 var superSecret = config.SUPERSECRET;
@@ -12,6 +13,12 @@ module.exports = function(express){
   authApi.post('/register', function(req, res){
     UserController.register(req, res);
   });
+  //Before Middleware
+  authApi.route('/photo/:id')
+      .get(function(req, res) {
+          var id = req.params.id;
+          PhotoController.getImage(req, res, id);
+      });
   //Middleware to avoid using the rest of API without Token
   authApi.use(function(req, res, next){
     //Check header or url parameters or post parameters for token
@@ -43,7 +50,7 @@ module.exports = function(express){
   });
   authApi.get('/me', function(req, res){
     //Return the information about the user authenticated by TOKEN
-    res.json(req.decoded);
+    UserController.me(req, res);
   })
   return authApi;
 }
