@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config = require('./config');
 var morgan = require('morgan');
+var socket = require('./server/sockets/masterSocket');
 var app = express();
 //To grab data from POST
 app.use(bodyParser.json({limit: '50mb'}));
@@ -32,6 +33,8 @@ app.use('/api/v1', followApi);
 var commentApi = require('./server/routes/commentApi')(express);
 app.use('/api/v1', commentApi);
 //Listen
-app.listen(config.PORT, function(){
+var server = app.listen(config.PORT, function(){
   console.log('Server Running on: ' + config.PORT);
 });
+var io = require('socket.io')(server);
+io.sockets.on('connection', socket);

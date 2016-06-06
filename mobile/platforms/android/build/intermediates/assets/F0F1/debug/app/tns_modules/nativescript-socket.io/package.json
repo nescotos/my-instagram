@@ -1,0 +1,62 @@
+{
+  "name": "nativescript-socket.io",
+  "version": "0.1.6",
+  "description": "Socket.io implementation in NativeScript",
+  "main": "socket.js",
+  "nativescript": {
+    "platforms": {
+      "ios": "1.5.0",
+      "android": "1.5.0"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naderio/nativescript-socket.io.git"
+  },
+  "keywords": [
+    "nativescript",
+    "socket.io"
+  ],
+  "author": {
+    "name": "Nader Toukabri",
+    "email": "contact@nader.tn"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naderio/nativescript-socket.io/issues"
+  },
+  "homepage": "https://github.com/naderio/nativescript-socket.io#readme",
+  "devDependencies": {
+    "typescript": "^1.8.10"
+  },
+  "gitHead": "0b8bac70ca5beaf28ba6b60b19e416c55bf2ae83",
+  "_id": "nativescript-socket.io@0.1.6",
+  "_shasum": "ba908eaf375fa19faebd2af13d381413d7676479",
+  "_from": "nativescript-socket.io@latest",
+  "_npmVersion": "3.8.7",
+  "_nodeVersion": "4.4.3",
+  "_npmUser": {
+    "name": "naderio",
+    "email": "contact@nader.tn"
+  },
+  "dist": {
+    "shasum": "ba908eaf375fa19faebd2af13d381413d7676479",
+    "tarball": "https://registry.npmjs.org/nativescript-socket.io/-/nativescript-socket.io-0.1.6.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "naderio",
+      "email": "contact@nader.tn"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/nativescript-socket.io-0.1.6.tgz_1463408371012_0.4193402943201363"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/nativescript-socket.io/-/nativescript-socket.io-0.1.6.tgz",
+  "readme": "ERROR: No README data found!"
+}

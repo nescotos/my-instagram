@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/nestor/Escritorio/my-instagram/mobile/platforms/android/build/intermediates/res/merged/F0F1/debug/drawable-ldpi-v4/icon.png",
+        "source": "/home/nestor/Escritorio/my-instagram/mobile/platforms/android/src/main/res/drawable-ldpi/icon.png"
+    },
+    {
+        "merged": "/home/nestor/Escritorio/my-instagram/mobile/platforms/android/build/intermediates/res/merged/F0F1/debug/drawable-ldpi-v4/ic_launcher.png",
+        "source": "/home/nestor/Escritorio/my-instagram/mobile/platforms/android/src/main/res/drawable-ldpi/ic_launcher.png"
+    }
+]

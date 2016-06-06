@@ -1,6 +1,6 @@
 android {
           productFlavors {
-            "F0" {
+            "F1" {
               dimension "tnscoremoduleswidgets"
             }
           }

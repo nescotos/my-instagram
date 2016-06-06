@@ -5,13 +5,14 @@ import {TextField} from "ui/text-field";
 import {Color} from "color";
 import {Config} from '../../config';
 import {UserService} from  '../../services/user.services';
+import {SocketService} from '../../services/socket.services';
 var appSettings = require("application-settings");
 
 @Component({
     selector: 'login-component',
     templateUrl: './views/login/login.component.html',
     styleUrls: ["app.css"],
-    providers: [UserService]
+    providers: [UserService, SocketService]
 })
 
 export class LoginComponent implements OnInit {
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     password:string = "";
     username:string = "";
 
-    constructor(public page: Page, public userService:UserService) {
+    constructor(public page: Page, public userService:UserService, public socket:SocketService) {
 
     }
 
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
             appSettings.setString('token', token['token']);
             // //Redirect
             // this.router.navigate(['Home']);
+            this.socket.joinWatchSocket();
             alert('Login success');
           }else{
             // this.error = token['message'];

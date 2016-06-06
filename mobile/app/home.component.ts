@@ -1,21 +1,25 @@
 import {Component} from '@angular/core';
 import {RouteConfig, Router} from '@angular/router-deprecated';
 import {PhotoService} from './services/photo.services';
+import {SocketService} from './services/socket.services';
 var appSettings = require("application-settings");
 var cameraModule = require("camera");
 var enums = require("ui/enums");
 @Component({
   selector: 'home-component',
   templateUrl: './views/home.component.html',
-  providers: [PhotoService]
+  providers: [PhotoService, SocketService]
 })
 
 export class HomeComponent{
 
   public description:string;
 
-  constructor(public router:Router, public photoService:PhotoService){
+  constructor(public router:Router, public photoService:PhotoService, public socket:SocketService){
+  }
 
+  public joinSocket(){
+        this.socket.joinWatchSocket();
   }
   public goLogin(){
     this.router.navigate(['Login']);

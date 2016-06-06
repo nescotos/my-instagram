@@ -2,11 +2,13 @@
 var core_1 = require("@angular/core");
 var page_1 = require("ui/page");
 var user_services_1 = require('../../services/user.services');
+var socket_services_1 = require('../../services/socket.services');
 var appSettings = require("application-settings");
 var LoginComponent = (function () {
-    function LoginComponent(page, userService) {
+    function LoginComponent(page, userService, socket) {
         this.page = page;
         this.userService = userService;
+        this.socket = socket;
         //@ViewChild("email") email: ElementRef;
         //@ViewChild("password") password: ElementRef;
         this.password = "";
@@ -17,6 +19,7 @@ var LoginComponent = (function () {
         // this.setTextFieldColors();
     };
     LoginComponent.prototype.doLogin = function () {
+        var _this = this;
         this.userService.login(this.username, this.password)
             .subscribe(function (token) {
             if (token) {
@@ -26,6 +29,7 @@ var LoginComponent = (function () {
                     appSettings.setString('token', token['token']);
                     // //Redirect
                     // this.router.navigate(['Home']);
+                    _this.socket.joinWatchSocket();
                     alert('Login success');
                 }
                 else {
@@ -45,9 +49,9 @@ var LoginComponent = (function () {
             selector: 'login-component',
             templateUrl: './views/login/login.component.html',
             styleUrls: ["app.css"],
-            providers: [user_services_1.UserService]
+            providers: [user_services_1.UserService, socket_services_1.SocketService]
         }), 
-        __metadata('design:paramtypes', [page_1.Page, user_services_1.UserService])
+        __metadata('design:paramtypes', [page_1.Page, user_services_1.UserService, socket_services_1.SocketService])
     ], LoginComponent);
     return LoginComponent;
 }());
