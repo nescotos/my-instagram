@@ -16,6 +16,10 @@ var SocketService = (function () {
             alert("Redirect to login...");
         }
     }
+    SocketService.prototype.sendPhoto = function (rawData) {
+        console.log('Sending data');
+        this.socket.emit('photo:uploaded', { token: this.token, rawData: rawData });
+    };
     SocketService.prototype.joinWatchSocket = function () {
         this.socket.emit('login', { token: this.token });
     };

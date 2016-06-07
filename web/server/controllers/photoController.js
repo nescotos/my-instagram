@@ -39,6 +39,37 @@ module.exports = {
                 }
               });
             },
+  createPhotoBySocket : function(data, decoded){
+              //Creating photo model
+              var photo = new Photo();
+              //If description
+              if(data.description){
+                photo.description = data.description;
+              }
+              photo.owner = decoded.id;
+              photo.save(function(err){
+                if(err){
+                  console.log('Error uploading photo');
+                }else{
+                  var photoId = photo._id;
+                  var rawData = data.rawData.replace(/^data:image\/jpeg;base64,/, "");
+                  fs.writeFile(path.resolve(__dirname + '/../../photos/' + photoId + '.jpg'), rawData, 'base64', function(err){
+                    if(err){
+                      console.log(err);
+                    }else{
+                      User.update({username : decoded.username }, {$push : {photos : photoId}}, {upsert:true}, function(err){
+                        if(err){
+                          console.log(err);
+                          console.log('Error uploading photo');
+                        }else{
+                          return photo;
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            },
     likePhoto : function(req, res, id){
                   Photo.update({_id : id}, {$push : {likes : req.decoded.id}}, function(err){
                     if(err){

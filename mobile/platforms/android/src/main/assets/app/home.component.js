@@ -15,6 +15,9 @@ var HomeComponent = (function () {
     HomeComponent.prototype.joinSocket = function () {
         this.socket.joinWatchSocket();
     };
+    // public sendSocketPhoto(){
+    //   this.socket.sendPhoto();
+    // }
     HomeComponent.prototype.goLogin = function () {
         this.router.navigate(['Login']);
     };
@@ -30,7 +33,7 @@ var HomeComponent = (function () {
         var vm = this;
         cameraModule.takePicture({ width: 500, height: 500, keepAspectRatio: true }).then(function (picture) {
             var rawData = picture.toBase64String(enums.ImageFormat.jpeg, 100);
-            vm.sendPhoto(rawData);
+            vm.socket.sendPhoto(rawData);
         });
     };
     HomeComponent.prototype.sendPhoto = function (rawData) {

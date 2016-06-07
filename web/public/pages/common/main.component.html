@@ -1,3 +1,6 @@
+<div *ngIf="newPhotos.length > 0" class="jumbotron">
+  <button class="btn btn-success" (click)="mergeArrays()">New {{newPhotos.length}} photos!</button>
+</div>
 <div *ngFor="let photo of photos">
     <div class="row">
         <div class="col-md-3"></div>

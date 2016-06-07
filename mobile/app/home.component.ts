@@ -21,6 +21,10 @@ export class HomeComponent{
   public joinSocket(){
         this.socket.joinWatchSocket();
   }
+
+  // public sendSocketPhoto(){
+  //   this.socket.sendPhoto();
+  // }
   public goLogin(){
     this.router.navigate(['Login']);
   }
@@ -36,7 +40,7 @@ export class HomeComponent{
     var vm = this;
      cameraModule.takePicture({width: 500, height: 500, keepAspectRatio: true}).then(function(picture) {
        let rawData = picture.toBase64String(enums.ImageFormat.jpeg, 100);
-       vm.sendPhoto(rawData);
+       vm.socket.sendPhoto(rawData);
      });
   }
   public sendPhoto(rawData){

@@ -44,6 +44,9 @@ var UserService = (function () {
         }
         return false;
     };
+    UserService.prototype.getToken = function () {
+        return window.localStorage.getItem("token");
+    };
     UserService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

@@ -36,4 +36,8 @@ export class UserService {
     }
     return false;
   }
+
+  getToken(){
+    return window.localStorage.getItem("token");
+  }
 }

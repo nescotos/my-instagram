@@ -17,8 +17,12 @@ export class SocketService{
     }
   }
 
-  joinWatchSocket(){
+  sendPhoto(rawData){
+    console.log('Sending data');
+    this.socket.emit('photo:uploaded', {token : this.token, rawData : rawData});
+  }  
 
+  joinWatchSocket(){
     this.socket.emit('login', {token : this.token});
   }
 }
