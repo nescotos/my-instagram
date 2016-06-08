@@ -35,8 +35,43 @@ var UserService = (function () {
             });
         });
     };
+    UserService.prototype.findUser = function (userId) {
+        var _this = this;
+        return new Observable_1.Observable(function (observable) {
+            var headers = new http_1.Headers();
+            headers.append("Content-Type", "application/json");
+            headers.append("x-access-token", localStorage.getItem("token"));
+            _this.http.get('/api/v1/user/' + userId, { headers: headers }).map(function (res) { return res.json(); })
+                .subscribe(function (res) {
+                if (res.code == "404" || res.code == "500") {
+                    console.error('Brutal error');
+                }
+                else {
+                    observable.next(res);
+                }
+            });
+        });
+    };
+    UserService.prototype.search = function (query) {
+        var _this = this;
+        return new Observable_1.Observable(function (observable) {
+            var headers = new http_1.Headers();
+            headers.append("Content-Type", "application/json");
+            headers.append("x-access-token", localStorage.getItem("token"));
+            _this.http.get('/api/v1/search/' + query, { headers: headers }).map(function (res) { return res.json(); })
+                .subscribe(function (res) {
+                if (res.code == "404" || res.code == "500") {
+                    console.error('Brutal error');
+                }
+                else {
+                    observable.next(res);
+                }
+            });
+        });
+    };
     UserService.prototype.logout = function () {
         window.localStorage.removeItem("token");
+        window.localStorage.removeItem("id");
     };
     UserService.prototype.isAuth = function () {
         if (window.localStorage.getItem("token")) {
@@ -46,6 +81,9 @@ var UserService = (function () {
     };
     UserService.prototype.getToken = function () {
         return window.localStorage.getItem("token");
+    };
+    UserService.prototype.getId = function () {
+        return window.localStorage.getItem('id');
     };
     UserService = __decorate([
         core_1.Injectable(), 

@@ -11,29 +11,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var user_services_1 = require('../services/user.services');
 var router_deprecated_1 = require('@angular/router-deprecated');
-var HeaderComponent = (function () {
-    function HeaderComponent(userService, router) {
+var SearchComponent = (function () {
+    function SearchComponent(userService, params) {
         this.userService = userService;
-        this.router = router;
-        this.id = this.userService.getId();
+        this.params = params;
     }
-    HeaderComponent.prototype.doLogout = function () {
-        this.userService.logout();
-        this.router.navigate(['Login']);
+    SearchComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userService.search(this.params.get('query')).subscribe(function (users) {
+            if (users) {
+                _this.users = users;
+            }
+        });
     };
-    HeaderComponent.prototype.doSearch = function () {
-        this.router.navigateByUrl('/search/' + this.searchQuery);
-    };
-    HeaderComponent = __decorate([
+    SearchComponent = __decorate([
         core_1.Component({
-            selector: 'header-component',
-            templateUrl: 'public/pages/common/header.component.html',
-            directives: [router_deprecated_1.RouterLink],
-            providers: [user_services_1.UserService]
+            selector: 'seach-component',
+            templateUrl: 'public/pages/common/search.component.html',
+            directives: [router_deprecated_1.RouterLink]
         }), 
-        __metadata('design:paramtypes', [user_services_1.UserService, router_deprecated_1.Router])
-    ], HeaderComponent);
-    return HeaderComponent;
+        __metadata('design:paramtypes', [user_services_1.UserService, router_deprecated_1.RouteParams])
+    ], SearchComponent);
+    return SearchComponent;
 }());
-exports.HeaderComponent = HeaderComponent;
-//# sourceMappingURL=header.component.js.map
+exports.SearchComponent = SearchComponent;
+//# sourceMappingURL=search.component.js.map

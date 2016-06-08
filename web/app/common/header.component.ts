@@ -10,13 +10,18 @@ import {Router, RouterLink} from '@angular/router-deprecated';
 })
 
 export class HeaderComponent{
-
+  public id;
+  public searchQuery;
     constructor(public userService:UserService, public router:Router){
-
+      this.id = this.userService.getId();
     }
 
     doLogout(){
       this.userService.logout();
       this.router.navigate(['Login']);
+    }
+
+    doSearch(){
+      this.router.navigateByUrl('/search/'+this.searchQuery);
     }
 }

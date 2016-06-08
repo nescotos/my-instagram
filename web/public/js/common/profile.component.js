@@ -11,29 +11,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var user_services_1 = require('../services/user.services');
 var router_deprecated_1 = require('@angular/router-deprecated');
-var HeaderComponent = (function () {
-    function HeaderComponent(userService, router) {
+var ProfileComponent = (function () {
+    function ProfileComponent(params, userService) {
+        var _this = this;
+        this.params = params;
         this.userService = userService;
-        this.router = router;
-        this.id = this.userService.getId();
+        var userId = this.params.get('userId');
+        this.userService.findUser(userId).subscribe(function (user) {
+            if (user) {
+                _this.user = user;
+            }
+        });
     }
-    HeaderComponent.prototype.doLogout = function () {
-        this.userService.logout();
-        this.router.navigate(['Login']);
+    ProfileComponent.prototype.ngOnInit = function () {
     };
-    HeaderComponent.prototype.doSearch = function () {
-        this.router.navigateByUrl('/search/' + this.searchQuery);
-    };
-    HeaderComponent = __decorate([
+    ProfileComponent = __decorate([
         core_1.Component({
-            selector: 'header-component',
-            templateUrl: 'public/pages/common/header.component.html',
-            directives: [router_deprecated_1.RouterLink],
-            providers: [user_services_1.UserService]
+            selector: 'profile-component',
+            templateUrl: 'public/pages/common/profile.component.html'
         }), 
-        __metadata('design:paramtypes', [user_services_1.UserService, router_deprecated_1.Router])
-    ], HeaderComponent);
-    return HeaderComponent;
+        __metadata('design:paramtypes', [router_deprecated_1.RouteParams, user_services_1.UserService])
+    ], ProfileComponent);
+    return ProfileComponent;
 }());
-exports.HeaderComponent = HeaderComponent;
-//# sourceMappingURL=header.component.js.map
+exports.ProfileComponent = ProfileComponent;
+//# sourceMappingURL=profile.component.js.map

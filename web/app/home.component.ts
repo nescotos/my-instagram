@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HeaderComponent} from './common/header.component';
 import {MainComponent} from './common/main.component';
+import {ProfileComponent} from './common/profile.component';
+import {SearchComponent} from './common/search.component';
 import {RouteConfig, RouterOutlet, Router} from '@angular/router-deprecated';
 
 @Component({
@@ -16,7 +18,8 @@ import {RouteConfig, RouterOutlet, Router} from '@angular/router-deprecated';
 
 @RouteConfig([
     { path: '/', name: "Main", component: MainComponent, useAsDefault : true},
-    // { path: '/login', name: "Login", component: }
+    { path: '/user/:userId', name: "Profile", component: ProfileComponent },
+    { path: '/search/:query', name: "Search", component: SearchComponent}
 ])
 
 export class HomeComponent{

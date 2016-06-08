@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var Observable_1 = require('rxjs/Observable');
 var core_1 = require('@angular/core');
 var http_1 = require("@angular/http");
+var router_deprecated_1 = require('@angular/router-deprecated');
 require("rxjs/add/operator/do");
 require("rxjs/add/operator/map");
 var PhotoService = (function () {
-    function PhotoService(http) {
+    function PhotoService(http, router) {
         this.http = http;
+        this.router = router;
     }
     PhotoService.prototype.getAllPhotosByWall = function () {
         var _this = this;
@@ -28,15 +30,25 @@ var PhotoService = (function () {
                 if (res.code == "404" || res.code == "500") {
                     console.error('Brutal error');
                 }
+                else if (res.code == "403") {
+                    console.log('Unauthorized!');
+                }
                 else {
                     observable.next(res);
+                }
+            }, function (error) {
+                //Checking if error 403
+                if (error.status === 403) {
+                    //We have no valid token, then redirect to login an clean the token field
+                    localStorage.removeItem("token");
+                    _this.router.navigateByUrl('/login');
                 }
             });
         });
     };
     PhotoService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, router_deprecated_1.Router])
     ], PhotoService);
     return PhotoService;
 }());

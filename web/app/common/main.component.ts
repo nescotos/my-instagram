@@ -49,4 +49,8 @@ export class MainComponent implements OnInit {
   joinSocket(){
     this.socket.emit("login", {token : this.userService.getToken()});
   }
+
+  getProfileImageURL(id){
+    return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();
+  }
 }

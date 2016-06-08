@@ -7,6 +7,16 @@ module.exports = {
               //Sendind image
               res.sendFile(path.resolve(__dirname + '/../../photos/' + id + '.jpg'));
             },
+  getProfileImage : function(req, res){
+    fs.stat(__dirname + '/../../profile/' + req.params.idUser + '.jpg', function (err, stat) {
+        if (err) {
+            res.sendFile(path.resolve(__dirname + '/../../profile/default.png'));
+        }else{
+          res.sendFile(path.resolve(__dirname + '/../../profile/' + req.params.idUser + '.jpg'));
+        }
+
+    });
+  },
   createPhoto : function(req, res){
               //Creating photo model
               var photo = new Photo();

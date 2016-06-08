@@ -27,6 +27,7 @@ var LoginComponent = (function () {
                 //Logic to store token
                 if (token['success']) {
                     window.localStorage.setItem('token', token['token']);
+                    window.localStorage.setItem('id', token['id']);
                     //Redirect
                     _this.router.navigate(['Home']);
                 }

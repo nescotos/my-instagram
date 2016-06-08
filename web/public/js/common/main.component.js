@@ -47,6 +47,9 @@ var MainComponent = (function () {
     MainComponent.prototype.joinSocket = function () {
         this.socket.emit("login", { token: this.userService.getToken() });
     };
+    MainComponent.prototype.getProfileImageURL = function (id) {
+        return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();
+    };
     MainComponent = __decorate([
         core_1.Component({
             selector: 'main-component',

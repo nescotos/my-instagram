@@ -25,9 +25,40 @@ export class UserService {
       })
     })
   }
+  findUser(userId:string){
+    return new Observable(observable => {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("x-access-token", localStorage.getItem("token"));
+      this.http.get('/api/v1/user/' + userId,{headers : headers}).map(res => res.json())
+      .subscribe(res => {
+        if(res.code == "404" || res.code == "500"){
+          console.error('Brutal error');
+        }else{
+          observable.next(res);
+        }
+      })
+    })
+  }
+  search(query:string){
+    return new Observable(observable => {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("x-access-token", localStorage.getItem("token"));
+      this.http.get('/api/v1/search/' + query,{headers : headers}).map(res => res.json())
+      .subscribe(res => {
+        if(res.code == "404" || res.code == "500"){
+          console.error('Brutal error');
+        }else{
+          observable.next(res);
+        }
+      })
+    })
+  }
 
   logout(){
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("id");
   }
 
   isAuth(){
@@ -39,5 +70,9 @@ export class UserService {
 
   getToken(){
     return window.localStorage.getItem("token");
+  }
+
+  getId(){
+    return window.localStorage.getItem('id');
   }
 }

@@ -8,8 +8,8 @@
     <a class="navbar-brand" href="" [routerLink]="['Home']">MyGram</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
-    <form class="navbar-form navbar-right">
-      <input type="text" class="form-control col-lg-8" placeholder="Search">
+    <form class="navbar-form navbar-right" (ngSubmit)="doSearch()">
+      <input type="text" [(ngModel)]="searchQuery" class="form-control col-lg-8" placeholder="Search">
     </form>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
@@ -17,7 +17,7 @@
         <ul class="dropdown-menu">
           <li><a href="#">Followers</a></li>
           <li><a href="#">Following</a></li>
-          <li><a href="#">Me</a></li>
+          <li><a href="" [routerLink]="['Profile', {userId : id}]">Me</a></li>
           <li class="divider"></li>
           <li><a (click)="doLogout()">Logout</a></li>
         </ul>

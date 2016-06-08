@@ -8,5 +8,10 @@ module.exports = function(express){
     UserController.userSearch(req, res);
   });
 
+  otherApi.route('/user/:userId')
+  .get(function(req, res){
+    UserController.findUserById(req, res);
+  })
+
   return otherApi;
 }

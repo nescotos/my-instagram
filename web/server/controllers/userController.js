@@ -36,7 +36,8 @@ module.exports = {
                     res.json({
                         success: true,
                         message: 'Login Succesful',
-                        token: token
+                        token: token,
+                        id: user._id
                     });
                 }
             }
@@ -104,5 +105,15 @@ module.exports = {
           res.json(users);
         }
       });
+    },
+    findUserById: function(req, res){
+      User.findById(req.params.userId, function(err, user){
+        if(err){
+          console.log(err);
+          res.status(500).json({success : false, message: 'Error, we are sorry'});
+        }else{
+          res.json(user);
+        }
+      })
     }
 }
