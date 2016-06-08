@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {RouteConfig, Router} from '@angular/router-deprecated';
 import {PhotoService} from './services/photo.services';
 import {SocketService} from './services/socket.services';
+import {registerElement, ViewClass} from "nativescript-angular/element-registry";
+registerElement("PullToRefresh", () => require("nativescript-pulltorefresh").PullToRefresh);
 var appSettings = require("application-settings");
 var cameraModule = require("camera");
 var enums = require("ui/enums");
@@ -36,6 +38,17 @@ export class HomeComponent{
       alert("No token!");
     }
   }
+
+  public refresh(args){
+    // Get reference to the PullToRefresh;
+    var pullRefresh = args.object;
+        // ONLY USING A TIMEOUT TO SIMULATE/SHOW OFF THE REFRESHING
+        setTimeout(function () {
+            pullRefresh.refreshing = false;
+        }, 1000);
+  }
+
+  
   public takePhoto(){
     var vm = this;
      cameraModule.takePicture({width: 500, height: 500, keepAspectRatio: true}).then(function(picture) {

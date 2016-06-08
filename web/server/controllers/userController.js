@@ -92,5 +92,17 @@ module.exports = {
         } catch (err) {
             return false;
         }
+    },
+    userSearch: function(req, res){
+      User.find({ $text: {$search : req.params.query}},
+      {score : { $meta : 'textScore'}}).sort({score : {$meta : 'textScore'}})
+      .limit(10).exec(function(err, users){
+        if(err){
+          console.log(err);
+          res.json({success : false, message : 'Error, try later'});
+        }else{
+          res.json(users);
+        }
+      });
     }
 }

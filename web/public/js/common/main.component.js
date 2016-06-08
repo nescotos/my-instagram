@@ -20,7 +20,7 @@ var MainComponent = (function () {
         this.isNewPhotos = false;
         this.socket = io();
         this.socket.on('photo:received', function (data) {
-            context.newPhotos.unshift(data);
+            context.newPhotos.push(data);
             context.isNewPhotos = true;
         });
         //Joining to socket

@@ -51,6 +51,6 @@ module.exports = function(express){
   authApi.get('/me', function(req, res){
     //Return the information about the user authenticated by TOKEN
     UserController.me(req, res);
-  })
+  });
   return authApi;
 }

@@ -1,62 +1,71 @@
 package com.tns;
 
-@com.tns.JavaScriptImplementation(javaScriptFile = "./tns_modules/ui/frame/frame.js")
+import android.animation.Animator;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+@JavaScriptImplementation(javaScriptFile = "./tns_modules/ui/frame/frame.js")
 public class FragmentClass extends android.app.Fragment implements com.tns.NativeScriptHashCodeProvider {
-	public FragmentClass(){
-		super();
-		com.tns.Runtime.initInstance(this);
-	}
 
-	public void onHiddenChanged(boolean param_0)  {
-		java.lang.Object[] args = new java.lang.Object[1];
-		args[0] = param_0;
-		com.tns.Runtime.callJSMethod(this, "onHiddenChanged", void.class, args);
-	}
+    public FragmentClass()
+    {
+        com.tns.Runtime.initInstance(this);
+    }
 
-	public android.animation.Animator onCreateAnimator(int param_0, boolean param_1, int param_2)  {
-		java.lang.Object[] args = new java.lang.Object[3];
-		args[0] = param_0;
-		args[1] = param_1;
-		args[2] = param_2;
-		return (android.animation.Animator)com.tns.Runtime.callJSMethod(this, "onCreateAnimator", android.animation.Animator.class, args);
-	}
+    public void onHiddenChanged(boolean hidden) {
+        java.lang.Object[] params = new Object[1];
+        params[0] = hidden;
+        com.tns.Runtime.callJSMethod(this, "onHiddenChanged", void.class, params);
+    }
 
-	public void onCreate(android.os.Bundle param_0)  {
-		java.lang.Object[] args = new java.lang.Object[1];
-		args[0] = param_0;
-		com.tns.Runtime.callJSMethod(this, "onCreate", void.class, args);
-	}
+    public Animator onCreateAnimator(int transit, boolean enter, int nextAnim) {
+        java.lang.Object[] params = new Object[3];
+        params[0] = transit;
+        params[1] = enter;
+        params[2] = nextAnim;
+        return (Animator)com.tns.Runtime.callJSMethod(this, "onCreateAnimator", Animator.class, params);
 
-	public android.view.View onCreateView(android.view.LayoutInflater param_0, android.view.ViewGroup param_1, android.os.Bundle param_2)  {
-		java.lang.Object[] args = new java.lang.Object[3];
-		args[0] = param_0;
-		args[1] = param_1;
-		args[2] = param_2;
-		return (android.view.View)com.tns.Runtime.callJSMethod(this, "onCreateView", android.view.View.class, args);
-	}
+    }
 
-	public void onSaveInstanceState(android.os.Bundle param_0)  {
-		java.lang.Object[] args = new java.lang.Object[1];
-		args[0] = param_0;
-		com.tns.Runtime.callJSMethod(this, "onSaveInstanceState", void.class, args);
-	}
+    public void onCreate(Bundle savedInstanceState) {
+        java.lang.Object[] params = new Object[1];
+        params[0] = savedInstanceState;
+        com.tns.Runtime.callJSMethod(this, "onCreate", void.class, params);
+    }
 
-	public void onDestroyView()  {
-		java.lang.Object[] args = null;
-		com.tns.Runtime.callJSMethod(this, "onDestroyView", void.class, args);
-	}
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        java.lang.Object[] params = new Object[3];
+        params[0] = inflater;
+        params[1] = container;
+        params[2] = savedInstanceState;
+        return (View)com.tns.Runtime.callJSMethod(this, "onCreateView", View.class, params);
 
-	public void onDestroy()  {
-		java.lang.Object[] args = null;
-		com.tns.Runtime.callJSMethod(this, "onDestroy", void.class, args);
-	}
+    }
 
-	public boolean equals__super(java.lang.Object other) {
-		return super.equals(other);
-	}
+    public void onSaveInstanceState(Bundle outState) {
+        java.lang.Object[] params = new Object[1];
+        params[0] = outState;
+        com.tns.Runtime.callJSMethod(this, "onSaveInstanceState", void.class, params);
+    }
 
-	public int hashCode__super() {
-		return super.hashCode();
-	}
+    public void onDestroyView() {
+        java.lang.Object[] params = null;
+        com.tns.Runtime.callJSMethod(this, "onDestroyView", void.class, params);
+
+    }
+
+    public void onDestroy() {
+        java.lang.Object[] params = null;
+        com.tns.Runtime.callJSMethod(this, "onDestroy", void.class, params);
+
+    }
+    public boolean equals__super(java.lang.Object other) {
+        return super.equals(other);
+    }
+    public int hashCode__super() {
+        return super.hashCode();
+    }
 
 }

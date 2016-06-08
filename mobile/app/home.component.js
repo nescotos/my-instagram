@@ -3,6 +3,8 @@ var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var photo_services_1 = require('./services/photo.services');
 var socket_services_1 = require('./services/socket.services');
+var element_registry_1 = require("nativescript-angular/element-registry");
+element_registry_1.registerElement("PullToRefresh", function () { return require("nativescript-pulltorefresh").PullToRefresh; });
 var appSettings = require("application-settings");
 var cameraModule = require("camera");
 var enums = require("ui/enums");
@@ -28,6 +30,14 @@ var HomeComponent = (function () {
         else {
             alert("No token!");
         }
+    };
+    HomeComponent.prototype.refresh = function (args) {
+        // Get reference to the PullToRefresh;
+        var pullRefresh = args.object;
+        // ONLY USING A TIMEOUT TO SIMULATE/SHOW OFF THE REFRESHING
+        setTimeout(function () {
+            pullRefresh.refreshing = false;
+        }, 1000);
     };
     HomeComponent.prototype.takePhoto = function () {
         var vm = this;

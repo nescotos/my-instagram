@@ -32,6 +32,9 @@ app.use('/api/v1', followApi);
 //Comment Endpoint
 var commentApi = require('./server/routes/commentApi')(express);
 app.use('/api/v1', commentApi);
+//Other features Endpoint
+var otherApi = require('./server/routes/othersApi')(express);
+app.use('/api/v1', otherApi);
 //Listen
 var server = app.listen(config.PORT, function(){
   console.log('Server Running on: ' + config.PORT);

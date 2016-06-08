@@ -1,10 +1,10 @@
 
 android {
     productFlavors {
-              "F0" {
-                dimension "nativescriptsocketio"
-              }
-            }
+        "nativescript-socket.io" {
+            dimension "nativescriptsocketio"
+        }
+    }
 }
 
 dependencies {
