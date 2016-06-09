@@ -9,34 +9,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var photos_services_1 = require('../services/photos.services');
 var user_services_1 = require('../services/user.services');
 var router_deprecated_1 = require('@angular/router-deprecated');
-var ProfileComponent = (function () {
-    function ProfileComponent(params, userService) {
+var TimeAgoPipe_1 = require('angular2-moment/TimeAgoPipe');
+var PhotoComponent = (function () {
+    function PhotoComponent(params, photoService, userService) {
         var _this = this;
         this.params = params;
+        this.photoService = photoService;
         this.userService = userService;
-        var userId = this.params.get('userId');
-        this.userService.findUser(userId).subscribe(function (user) {
-            if (user) {
-                _this.user = user;
+        var id = params.get('id');
+        this.photoService.getFullPhoto(id).subscribe(function (photo) {
+            if (photo) {
+                _this.photo = photo;
             }
         });
     }
-    ProfileComponent.prototype.ngOnInit = function () {
-    };
-    ProfileComponent.prototype.getProfileImageURL = function (id) {
+    PhotoComponent.prototype.getProfileImageURL = function (id) {
         return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();
     };
-    ProfileComponent = __decorate([
+    PhotoComponent = __decorate([
         core_1.Component({
-            selector: 'profile-component',
-            templateUrl: 'public/pages/common/profile.component.html',
-            directives: [router_deprecated_1.RouterLink]
+            selector: 'photo-component',
+            pipes: [TimeAgoPipe_1.TimeAgoPipe],
+            templateUrl: 'public/pages/common/photo.component.html',
+            directives: [router_deprecated_1.RouterLink],
+            providers: [photos_services_1.PhotoService, user_services_1.UserService]
         }), 
-        __metadata('design:paramtypes', [router_deprecated_1.RouteParams, user_services_1.UserService])
-    ], ProfileComponent);
-    return ProfileComponent;
+        __metadata('design:paramtypes', [router_deprecated_1.RouteParams, photos_services_1.PhotoService, user_services_1.UserService])
+    ], PhotoComponent);
+    return PhotoComponent;
 }());
-exports.ProfileComponent = ProfileComponent;
-//# sourceMappingURL=profile.component.js.map
+exports.PhotoComponent = PhotoComponent;
+//# sourceMappingURL=photo.component.js.map

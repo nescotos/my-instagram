@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../services/user.services';
-import {Router, RouteParams} from '@angular/router-deprecated';
+import {Router, RouteParams, RouterLink} from '@angular/router-deprecated';
 
 @Component({
   selector : 'profile-component',
-  templateUrl : 'public/pages/common/profile.component.html'
+  templateUrl : 'public/pages/common/profile.component.html',
+  directives : [RouterLink]
 })
 
 export class ProfileComponent implements OnInit{
@@ -19,6 +20,10 @@ export class ProfileComponent implements OnInit{
   }
   ngOnInit(){
 
+  }
+
+  getProfileImageURL(id){
+    return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();
   }
 
 }

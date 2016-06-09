@@ -1,7 +1,4 @@
-<div *ngIf="newPhotos.length > 0" class="jumbotron">
-  <button class="btn btn-success" (click)="mergeArrays()">New {{newPhotos.length}} photos!</button>
-</div>
-<div *ngFor="let photo of photos">
+<div *ngIf="photo">
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
@@ -13,7 +10,7 @@
                             <a href="" [routerLink]="['Profile', {userId : photo['owner']['_id']}]"><img class="circle-avatar" src="{{getProfileImageURL(photo['owner']['_id'])}}" /></a>
                         </div>
                         <div class="col-md-6 text-right">
-                            {{photo['createdAt'] | amTimeAgo}}
+                            {{photo['createdAt'] | TimeAgoPipe}}
                         </div>
                     </div>
                 </div>
@@ -21,7 +18,7 @@
                     <img class="img-rounded img-responsive center-block" src="/photo/{{photo['_id']}}" />
                 </div>
                 <div class="panel-footer">
-                    <a href="" [routerLink]="['Photo', {id : photo['_id']}]"><i class="glyphicon glyphicon-resize-full"></i></a>&nbsp;&nbsp;
+                    <i class="glyphicon glyphicon-resize-full"></i>&nbsp;&nbsp;
                     <i class="glyphicon glyphicon-heart"></i>&nbsp; {{photo['likes'].length}} &nbsp;&nbsp;&nbsp;
                     <i class="glyphicon glyphicon-comment"></i>&nbsp; {{photo['comments'].length}}
                 </div>

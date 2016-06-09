@@ -11,6 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var photos_services_1 = require('../services/photos.services');
 var user_services_1 = require('../services/user.services');
+var router_deprecated_1 = require('@angular/router-deprecated');
+var TimeAgoPipe_1 = require('angular2-moment/TimeAgoPipe');
 var MainComponent = (function () {
     function MainComponent(photoService, userService) {
         this.photoService = photoService;
@@ -53,7 +55,9 @@ var MainComponent = (function () {
     MainComponent = __decorate([
         core_1.Component({
             selector: 'main-component',
+            pipes: [TimeAgoPipe_1.TimeAgoPipe],
             templateUrl: 'public/pages/common/main.component.html',
+            directives: [router_deprecated_1.RouterLink],
             providers: [photos_services_1.PhotoService, user_services_1.UserService]
         }), 
         __metadata('design:paramtypes', [photos_services_1.PhotoService, user_services_1.UserService])

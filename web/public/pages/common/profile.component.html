@@ -1,3 +1,23 @@
 <div *ngIf="user">
-  {{user['username']}}
+  <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="{{getProfileImageURL(user['_id'])}}" class="img-thumbnail profile-avatar">
+        </div>
+        <div class="col-md-8">
+          <h1>{{user['name']}}</h1><br>
+          <h3>{{user['username']}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-success">Follow</button></h3>&nbsp;&nbsp;&nbsp;<h4><strong>Followers: </strong>{{user['followers'].length}}&nbsp;&nbsp;&nbsp;<strong>Following: </strong>{{user['following'].length}}&nbsp;&nbsp;&nbsp;<strong>Photos: </strong>{{user['photos'].length}}</h4>
+        </div>
+      </div>
+  </div>
+  <div class="jumbotron">
+    <div class="row center-block">
+      <div *ngFor="let photo of user['photos'].reverse()">
+        <div class="col-md-4 center-block">
+          <a href="" [routerLink]="['Photo', {id : photo}]"><img class="list-photo" src="/photo/{{photo}}" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

@@ -36,5 +36,10 @@ module.exports = function(express) {
         PhotoController.getProfileImage(req, res);
       })
 
+      photoApi.route('/photoDisplay/:id')
+      .get(function(req,res){
+        PhotoController.getFullPhoto(req, res);
+      })
+
     return photoApi;
 }

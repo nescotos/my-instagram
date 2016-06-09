@@ -1,12 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {PhotoService} from '../services/photos.services';
 import {UserService} from '../services/user.services';
+import {RouterLink} from '@angular/router-deprecated';
+import {TimeAgoPipe} from 'angular2-moment/TimeAgoPipe';
 //We need this for SocketIO
 declare var io:any;
 
 @Component({
   selector : 'main-component',
+  pipes : [TimeAgoPipe],
   templateUrl: 'public/pages/common/main.component.html',
+  directives : [RouterLink],
   providers: [PhotoService, UserService]
 })
 

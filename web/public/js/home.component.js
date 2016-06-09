@@ -13,6 +13,7 @@ var header_component_1 = require('./common/header.component');
 var main_component_1 = require('./common/main.component');
 var profile_component_1 = require('./common/profile.component');
 var search_component_1 = require('./common/search.component');
+var photo_component_1 = require('./common/photo.component');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var HomeComponent = (function () {
     function HomeComponent() {
@@ -26,7 +27,8 @@ var HomeComponent = (function () {
         router_deprecated_1.RouteConfig([
             { path: '/', name: "Main", component: main_component_1.MainComponent, useAsDefault: true },
             { path: '/user/:userId', name: "Profile", component: profile_component_1.ProfileComponent },
-            { path: '/search/:query', name: "Search", component: search_component_1.SearchComponent }
+            { path: '/search/:query', name: "Search", component: search_component_1.SearchComponent },
+            { path: '/photo/:id', name: 'Photo', component: photo_component_1.PhotoComponent }
         ]), 
         __metadata('design:paramtypes', [])
     ], HomeComponent);

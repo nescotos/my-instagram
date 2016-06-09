@@ -21,4 +21,8 @@ export class SearchComponent implements OnInit{
       }
     })
   }
+
+  getProfileImageURL(id){
+    return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();
+  }
 }

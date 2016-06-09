@@ -24,6 +24,9 @@ var SearchComponent = (function () {
             }
         });
     };
+    SearchComponent.prototype.getProfileImageURL = function (id) {
+        return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();
+    };
     SearchComponent = __decorate([
         core_1.Component({
             selector: 'seach-component',

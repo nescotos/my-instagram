@@ -3,6 +3,7 @@ import {HeaderComponent} from './common/header.component';
 import {MainComponent} from './common/main.component';
 import {ProfileComponent} from './common/profile.component';
 import {SearchComponent} from './common/search.component';
+import {PhotoComponent} from './common/photo.component';
 import {RouteConfig, RouterOutlet, Router} from '@angular/router-deprecated';
 
 @Component({
@@ -19,7 +20,8 @@ import {RouteConfig, RouterOutlet, Router} from '@angular/router-deprecated';
 @RouteConfig([
     { path: '/', name: "Main", component: MainComponent, useAsDefault : true},
     { path: '/user/:userId', name: "Profile", component: ProfileComponent },
-    { path: '/search/:query', name: "Search", component: SearchComponent}
+    { path: '/search/:query', name: "Search", component: SearchComponent},
+    { path: '/photo/:id', name : 'Photo', component: PhotoComponent }
 ])
 
 export class HomeComponent{
