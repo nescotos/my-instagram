@@ -57,4 +57,32 @@ export class MainComponent implements OnInit {
   getProfileImageURL(id){
     return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();
   }
+
+  likePhoto(array, photoId){
+    this.userService.like(photoId).subscribe(like => {
+      if(like['success']){
+        array.push(this.userService.getId());
+      }else{
+        alert('Error');
+      }
+    })
+  }
+
+  unlikePhoto(array, photoId){
+    this.userService.unlike(photoId).subscribe(like => {
+      if(like['success']){
+        for(let i = 0; i < array.length; i++){
+          if(array[i] == this.userService.getId()){
+            array.splice(i, 1);
+          }
+        }
+      }else{
+        alert('Error');
+      }
+    })
+  }
+
+  canLike(array){
+    return (array.indexOf(this.userService.getId()) < 0);
+  }
 }

@@ -105,7 +105,8 @@ module.exports = {
             }
         });
     },
-    likePhoto: function(req, res, id) {
+    likePhoto: function(req, res) {
+      var id = req.body.photoId;
         Photo.update({
             _id: id
         }, {
@@ -123,6 +124,29 @@ module.exports = {
                 res.json({
                     success: true,
                     message: 'Like done!'
+                })
+            }
+        });
+    },
+    unlikePhoto: function(req, res) {
+      var id = req.body.photoId;
+        Photo.update({
+            _id: id
+        }, {
+            $pull: {
+                likes: req.decoded.id
+            }
+        }, function(err) {
+            if (err) {
+                console.log(err);
+                res.json({
+                    success: false,
+                    error: 'Ooops'
+                });
+            } else {
+                res.json({
+                    success: true,
+                    message: 'Unlike done!'
                 })
             }
         });

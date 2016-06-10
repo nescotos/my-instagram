@@ -10,7 +10,7 @@
                             <a href="" [routerLink]="['Profile', {userId : photo['owner']['_id']}]"><img class="circle-avatar" src="{{getProfileImageURL(photo['owner']['_id'])}}" /></a>
                         </div>
                         <div class="col-md-6 text-right">
-                            {{photo['createdAt'] | TimeAgoPipe}}
+                            {{photo['createdAt'] | amTimeAgo}}
                         </div>
                     </div>
                 </div>
@@ -18,11 +18,48 @@
                     <img class="img-rounded img-responsive center-block" src="/photo/{{photo['_id']}}" />
                 </div>
                 <div class="panel-footer">
-                    <i class="glyphicon glyphicon-resize-full"></i>&nbsp;&nbsp;
-                    <i class="glyphicon glyphicon-heart"></i>&nbsp; {{photo['likes'].length}} &nbsp;&nbsp;&nbsp;
+                    <i *ngIf="canLike()" (click)="likePhoto()" class="glyphicon glyphicon-heart clickable-item"></i><i *ngIf="!canLike()" (click)="unlikePhoto()" class="glyphicon glyphicon-heart clickable-item" style="color:red;"></i>&nbsp; {{photo['likes'].length}} &nbsp;&nbsp;&nbsp;
                     <i class="glyphicon glyphicon-comment"></i>&nbsp; {{photo['comments'].length}}
                 </div>
             </div>
+        </div>
+    </div>
+    <div *ngFor="let comment of photo['comments']" class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    {{comment['commenter']['username']}}
+                    <a href="" [routerLink]="['Profile', {userId : comment['commenter']['_id']}]"><img class="circle-avatar" src="{{getProfileImageURL(comment['commenter']['_id'])}}" /></a>
+                </div>
+                <div class="col-md-9">
+                    <b>{{comment['createdAt'] | amTimeAgo}}</b><br>
+                    {{comment['content']}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngFor="let comment of myComments" class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    {{userService.getUsername()}}
+                    <a href="" [routerLink]="['Profile', {userId : userService.getId()}]"><img class="circle-avatar" src="{{getProfileImageURL(userService.getId())}}" /></a>
+                </div>
+                <div class="col-md-9">
+                    <b>{{comment['createdAt'] | amTimeAgo}}</b><br>
+                    {{comment['content']}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form class="form" (ngSubmit)="createComment()">
+                <input type="textarea" class="form-control" placeholder="Type your comment here!" [(ngModel)]="comment">
+            </form>
         </div>
     </div>
 </div>

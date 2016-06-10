@@ -69,9 +69,78 @@ var UserService = (function () {
             });
         });
     };
+    UserService.prototype.follow = function (followingId) {
+        var _this = this;
+        return new Observable_1.Observable(function (observable) {
+            var headers = new http_1.Headers();
+            headers.append("Content-Type", "application/json");
+            headers.append("x-access-token", localStorage.getItem("token"));
+            _this.http.post('/api/v1/follow/', JSON.stringify({ followingId: followingId }), { headers: headers }).map(function (res) { return res.json(); })
+                .subscribe(function (res) {
+                if (res.code == "404" || res.code == "500") {
+                    console.error('Brutal error');
+                }
+                else {
+                    observable.next(res);
+                }
+            });
+        });
+    };
+    UserService.prototype.unfollow = function (followingId) {
+        var _this = this;
+        return new Observable_1.Observable(function (observable) {
+            var headers = new http_1.Headers();
+            headers.append("Content-Type", "application/json");
+            headers.append("x-access-token", localStorage.getItem("token"));
+            _this.http.post('/api/v1/unfollow/', JSON.stringify({ followingId: followingId }), { headers: headers }).map(function (res) { return res.json(); })
+                .subscribe(function (res) {
+                if (res.code == "404" || res.code == "500") {
+                    console.error('Brutal error');
+                }
+                else {
+                    observable.next(res);
+                }
+            });
+        });
+    };
+    UserService.prototype.like = function (photoId) {
+        var _this = this;
+        return new Observable_1.Observable(function (observable) {
+            var headers = new http_1.Headers();
+            headers.append("Content-Type", "application/json");
+            headers.append("x-access-token", localStorage.getItem("token"));
+            _this.http.post('/api/v1/photo/like', JSON.stringify({ photoId: photoId }), { headers: headers }).map(function (res) { return res.json(); })
+                .subscribe(function (res) {
+                if (res.code == "404" || res.code == "500") {
+                    console.error('Brutal error');
+                }
+                else {
+                    observable.next(res);
+                }
+            });
+        });
+    };
+    UserService.prototype.unlike = function (photoId) {
+        var _this = this;
+        return new Observable_1.Observable(function (observable) {
+            var headers = new http_1.Headers();
+            headers.append("Content-Type", "application/json");
+            headers.append("x-access-token", localStorage.getItem("token"));
+            _this.http.post('/api/v1/photo/unlike', JSON.stringify({ photoId: photoId }), { headers: headers }).map(function (res) { return res.json(); })
+                .subscribe(function (res) {
+                if (res.code == "404" || res.code == "500") {
+                    console.error('Brutal error');
+                }
+                else {
+                    observable.next(res);
+                }
+            });
+        });
+    };
     UserService.prototype.logout = function () {
         window.localStorage.removeItem("token");
         window.localStorage.removeItem("id");
+        window.localStorage.removeItem("username");
     };
     UserService.prototype.isAuth = function () {
         if (window.localStorage.getItem("token")) {
@@ -84,6 +153,9 @@ var UserService = (function () {
     };
     UserService.prototype.getId = function () {
         return window.localStorage.getItem('id');
+    };
+    UserService.prototype.getUsername = function () {
+        return window.localStorage.getItem('username');
     };
     UserService = __decorate([
         core_1.Injectable(), 

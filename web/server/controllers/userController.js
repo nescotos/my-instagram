@@ -37,7 +37,8 @@ module.exports = {
                         success: true,
                         message: 'Login Succesful',
                         token: token,
-                        id: user._id
+                        id: user._id,
+                        username : user.username
                     });
                 }
             }

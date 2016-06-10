@@ -56,9 +56,72 @@ export class UserService {
     })
   }
 
+  follow(followingId){
+    return new Observable(observable => {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("x-access-token", localStorage.getItem("token"));
+      this.http.post('/api/v1/follow/',JSON.stringify({followingId : followingId}),{headers : headers}).map(res => res.json())
+      .subscribe(res => {
+        if(res.code == "404" || res.code == "500"){
+          console.error('Brutal error');
+        }else{
+          observable.next(res);
+        }
+      })
+    })
+  }
+  unfollow(followingId){
+    return new Observable(observable => {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("x-access-token", localStorage.getItem("token"));
+      this.http.post('/api/v1/unfollow/',JSON.stringify({followingId : followingId}),{headers : headers}).map(res => res.json())
+      .subscribe(res => {
+        if(res.code == "404" || res.code == "500"){
+          console.error('Brutal error');
+        }else{
+          observable.next(res);
+        }
+      })
+    })
+  }
+
+  like(photoId){
+    return new Observable(observable => {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("x-access-token", localStorage.getItem("token"));
+      this.http.post('/api/v1/photo/like',JSON.stringify({photoId : photoId}),{headers : headers}).map(res => res.json())
+      .subscribe(res => {
+        if(res.code == "404" || res.code == "500"){
+          console.error('Brutal error');
+        }else{
+          observable.next(res);
+        }
+      })
+    })
+  }
+  unlike(photoId){
+    return new Observable(observable => {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("x-access-token", localStorage.getItem("token"));
+      this.http.post('/api/v1/photo/unlike',JSON.stringify({photoId : photoId}),{headers : headers}).map(res => res.json())
+      .subscribe(res => {
+        if(res.code == "404" || res.code == "500"){
+          console.error('Brutal error');
+        }else{
+          observable.next(res);
+        }
+      })
+    })
+  }
+
   logout(){
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("id");
+    window.localStorage.removeItem("username");
   }
 
   isAuth(){
@@ -74,5 +137,9 @@ export class UserService {
 
   getId(){
     return window.localStorage.getItem('id');
+  }
+
+  getUsername(){
+    return window.localStorage.getItem('username');
   }
 }

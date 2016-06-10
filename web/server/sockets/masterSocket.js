@@ -5,7 +5,7 @@ var fs = require('fs');
 var path = require('path');
 var Photo = require('../models/photo');
 var User = require('../models/user');
-var connectedUsers = [];
+// var connectedUsers = [];
 module.exports = function(socket){
   socket.on('login', function(data){
     //Verifiyign token
@@ -17,21 +17,21 @@ module.exports = function(socket){
         if(err){
           console.log(err);
         }else{
-          connectedUsers.push({socketId : socket.id, id: id});
-          console.log(connectedUsers);
+          // connectedUsers.push({socketId : socket.id, id: id});
+          // console.log(connectedUsers);
           //Joining to socket for that user.
           socket.join(id);
           //Joining to socket for following users connected
           for(var i = 0; i < user.following.length; i++){
             var currentUserId = user.following[i];
-            for(var j = 0; j < connectedUsers.length; j++){
+            // for(var j = 0; j < connectedUsers.length; j++){
               //Finding if user is connected
-              if(connectedUsers[j].id == currentUserId){
+              // if(connectedUsers[j].id == currentUserId){
                 //Then join to that socket
-                socket.join(connectedUsers[j].id);
-                break;
-              }
-            }
+                socket.join(currentUserId);
+                // break;
+              // }
+            // }
           }
           console.log('User ' + user.username + ' is in');
         }
@@ -42,6 +42,7 @@ module.exports = function(socket){
   });
   socket.on('photo:uploaded', function(data){
     //Verifiyign token
+    console.log(data.token);
     var tokenReceived = data.token;
     var decoded = UserController.tokenVerify(tokenReceived);
     if(decoded){
@@ -83,13 +84,14 @@ module.exports = function(socket){
   });
   socket.on('disconnect', function(){
       //Delete disconnected user socket
-     for(var i = 0; i < connectedUsers.length; i++){
-       if(connectedUsers[0].socketId == socket.id){
-         //Removing the socket
-         console.log('Socket ' + connectedUsers[i].socketId + ' deleted!');
-         connectedUsers = connectedUsers.splice(i, 1);
-         break;
-       }
-     }
+    //  for(var i = 0; i < connectedUsers.length; i++){
+    //    if(connectedUsers[0].socketId == socket.id){
+    //      //Removing the socket
+    //      console.log('Socket ' + connectedUsers[i].socketId + ' deleted!');
+    //      connectedUsers = connectedUsers.splice(i, 1);
+    //      break;
+    //    }
+    //  }
+    console.log(socket.id,"off");
    });
 }

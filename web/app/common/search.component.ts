@@ -25,4 +25,30 @@ export class SearchComponent implements OnInit{
   getProfileImageURL(id){
     return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();
   }
+
+
+    follow(array, id){
+      this.userService.follow(id).subscribe(follow => {
+        if(follow['success']){
+          array.push(this.userService.getId());
+        }
+      })
+    }
+
+    unfollow(array, id){
+      this.userService.unfollow(id).subscribe(follow => {
+        if(follow['success']){
+          for(let i = 0; i < array.length; i++){
+            if(array[i] == this.userService.getId()){
+              array['followers'].splice(i, 1);
+              break;
+            }
+          }
+        }
+      })
+    }
+
+    canFollow(array){
+      return (array.indexOf(this.userService.getId()) < 0);
+    }
 }

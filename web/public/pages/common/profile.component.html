@@ -6,7 +6,7 @@
         </div>
         <div class="col-md-8">
           <h1>{{user['name']}}</h1><br>
-          <h3>{{user['username']}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-success">Follow</button></h3>&nbsp;&nbsp;&nbsp;<h4><strong>Followers: </strong>{{user['followers'].length}}&nbsp;&nbsp;&nbsp;<strong>Following: </strong>{{user['following'].length}}&nbsp;&nbsp;&nbsp;<strong>Photos: </strong>{{user['photos'].length}}</h4>
+          <h3>{{user['username']}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-success" *ngIf="canFollow()" (click)="follow(user['_id'])">Follow</button><button class="btn btn-warning" *ngIf="!canFollow()" (click)="unfollow(user['_id'])">Unfollow</button></h3>&nbsp;&nbsp;&nbsp;<h4><strong>Followers: </strong>{{user['followers'].length}}&nbsp;&nbsp;&nbsp;<strong>Following: </strong>{{user['following'].length}}&nbsp;&nbsp;&nbsp;<strong>Photos: </strong>{{user['photos'].length}}</h4>
         </div>
       </div>
   </div>

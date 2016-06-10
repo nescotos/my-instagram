@@ -22,7 +22,7 @@
                 </div>
                 <div class="panel-footer">
                     <a href="" [routerLink]="['Photo', {id : photo['_id']}]"><i class="glyphicon glyphicon-resize-full"></i></a>&nbsp;&nbsp;
-                    <i class="glyphicon glyphicon-heart"></i>&nbsp; {{photo['likes'].length}} &nbsp;&nbsp;&nbsp;
+                    <i *ngIf="canLike(photo['likes'])" (click)="likePhoto(photo['likes'], photo['_id'])" class="glyphicon glyphicon-heart clickable-item"></i><i *ngIf="!canLike(photo['likes'])" (click)="unlikePhoto(photo['likes'], photo['_id'])" class="glyphicon glyphicon-heart clickable-item" style="color:red;"></i>&nbsp; {{photo['likes'].length}} &nbsp;&nbsp;&nbsp;
                     <i class="glyphicon glyphicon-comment"></i>&nbsp; {{photo['comments'].length}}
                 </div>
             </div>

@@ -52,6 +52,35 @@ var MainComponent = (function () {
     MainComponent.prototype.getProfileImageURL = function (id) {
         return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();
     };
+    MainComponent.prototype.likePhoto = function (array, photoId) {
+        var _this = this;
+        this.userService.like(photoId).subscribe(function (like) {
+            if (like['success']) {
+                array.push(_this.userService.getId());
+            }
+            else {
+                alert('Error');
+            }
+        });
+    };
+    MainComponent.prototype.unlikePhoto = function (array, photoId) {
+        var _this = this;
+        this.userService.unlike(photoId).subscribe(function (like) {
+            if (like['success']) {
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i] == _this.userService.getId()) {
+                        array.splice(i, 1);
+                    }
+                }
+            }
+            else {
+                alert('Error');
+            }
+        });
+    };
+    MainComponent.prototype.canLike = function (array) {
+        return (array.indexOf(this.userService.getId()) < 0);
+    };
     MainComponent = __decorate([
         core_1.Component({
             selector: 'main-component',

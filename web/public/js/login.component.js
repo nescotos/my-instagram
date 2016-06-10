@@ -28,6 +28,7 @@ var LoginComponent = (function () {
                 if (token['success']) {
                     window.localStorage.setItem('token', token['token']);
                     window.localStorage.setItem('id', token['id']);
+                    window.localStorage.setItem('username', token['username']);
                     //Redirect
                     _this.router.navigate(['Home']);
                 }

@@ -1,7 +1,8 @@
 var User = require('../models/user');
 
 module.exports = {
-  follow : function(req, res, id){
+  follow : function(req, res){
+    var id = req.body.followingId;
     User.update({username : req.decoded.username}, {$push : {following : id}}, function(err){
       if(err){
         console.log(err);
@@ -17,7 +18,8 @@ module.exports = {
       }
     });
   },
-  unfollow : function(req, res, id){
+  unfollow : function(req, res){
+    var id = req.body.followingId;
     User.update({username : req.decoded.username}, {$pull : {following : id}}, function(err){
       if(err){
         console.log(err);

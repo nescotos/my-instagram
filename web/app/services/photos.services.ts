@@ -32,6 +32,8 @@ export class PhotoService {
                     if(error.status === 403){
                       //We have no valid token, then redirect to login an clean the token field
                       localStorage.removeItem("token");
+                      localStorage.removeItem("id");
+                      localStorage.removeItem("username");
                       this.router.navigateByUrl('/login');
                     }
 
@@ -59,6 +61,8 @@ export class PhotoService {
                 if(error.status === 403){
                   //We have no valid token, then redirect to login an clean the token field
                   localStorage.removeItem("token");
+                  localStorage.removeItem("id");
+                  localStorage.removeItem("username");
                   this.router.navigateByUrl('/login');
                 }
 

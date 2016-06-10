@@ -12,10 +12,13 @@ module.exports = function(express) {
             PhotoController.deletePhoto(req, res, id);
         });
 
-    photoApi.route('/photo/like/:id')
+    photoApi.route('/photo/like')
         .post(function(req, res) {
-            var id = req.params.id;
-            PhotoController.likePhoto(req, res, id);
+            PhotoController.likePhoto(req, res);
+        })
+    photoApi.route('/photo/unlike')
+        .post(function(req, res){
+          PhotoController.unlikePhoto(req, res);
         });
 
     photoApi.route('/photo')

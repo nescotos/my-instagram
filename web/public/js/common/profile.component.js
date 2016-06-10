@@ -25,6 +25,29 @@ var ProfileComponent = (function () {
     }
     ProfileComponent.prototype.ngOnInit = function () {
     };
+    ProfileComponent.prototype.follow = function (id) {
+        var _this = this;
+        this.userService.follow(id).subscribe(function (follow) {
+            if (follow['success']) {
+                _this.user['followers'].push(_this.userService.getId());
+            }
+        });
+    };
+    ProfileComponent.prototype.unfollow = function (id) {
+        var _this = this;
+        this.userService.unfollow(id).subscribe(function (follow) {
+            if (follow['success']) {
+                for (var i = 0; i < _this.user['followers'].length; i++) {
+                    if (_this.user['followers'][i] == _this.userService.getId()) {
+                        _this.user['followers'].splice(i, 1);
+                    }
+                }
+            }
+        });
+    };
+    ProfileComponent.prototype.canFollow = function () {
+        return (this.user['followers'].indexOf(this.userService.getId()) < 0);
+    };
     ProfileComponent.prototype.getProfileImageURL = function (id) {
         return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();
     };

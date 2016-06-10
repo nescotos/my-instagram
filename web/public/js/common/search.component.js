@@ -27,6 +27,30 @@ var SearchComponent = (function () {
     SearchComponent.prototype.getProfileImageURL = function (id) {
         return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();
     };
+    SearchComponent.prototype.follow = function (array, id) {
+        var _this = this;
+        this.userService.follow(id).subscribe(function (follow) {
+            if (follow['success']) {
+                array.push(_this.userService.getId());
+            }
+        });
+    };
+    SearchComponent.prototype.unfollow = function (array, id) {
+        var _this = this;
+        this.userService.unfollow(id).subscribe(function (follow) {
+            if (follow['success']) {
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i] == _this.userService.getId()) {
+                        array['followers'].splice(i, 1);
+                        break;
+                    }
+                }
+            }
+        });
+    };
+    SearchComponent.prototype.canFollow = function (array) {
+        return (array.indexOf(this.userService.getId()) < 0);
+    };
     SearchComponent = __decorate([
         core_1.Component({
             selector: 'seach-component',

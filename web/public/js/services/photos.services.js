@@ -41,6 +41,8 @@ var PhotoService = (function () {
                 if (error.status === 403) {
                     //We have no valid token, then redirect to login an clean the token field
                     localStorage.removeItem("token");
+                    localStorage.removeItem("id");
+                    localStorage.removeItem("username");
                     _this.router.navigateByUrl('/login');
                 }
             });
@@ -68,6 +70,8 @@ var PhotoService = (function () {
                 if (error.status === 403) {
                     //We have no valid token, then redirect to login an clean the token field
                     localStorage.removeItem("token");
+                    localStorage.removeItem("id");
+                    localStorage.removeItem("username");
                     _this.router.navigateByUrl('/login');
                 }
             });

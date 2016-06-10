@@ -5,7 +5,7 @@
       </div>
       <div class="col-md-6">
         <h2>{{user['username']}}&nbsp;&nbsp;|&nbsp;&nbsp;{{user['name']}}</h2>
-        <br><a class="btn btn-info" href="" [routerLink]="['Profile', {userId : user['_id']}]">Watch Profile</a>&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-success">Follow</button>
+        <br><a class="btn btn-info" href="" [routerLink]="['Profile', {userId : user['_id']}]">Watch Profile</a>&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-success" *ngIf="canFollow(user['followers'])" (click)="follow(user['followers'], user['_id'])">Follow</button><button class="btn btn-warning" *ngIf="!canFollow(user['followers'])" (click)="unfollow(user['followers'] ,user['_id'])">Unfollow</button>
       </div>
     </div>
 </div>
