@@ -22,9 +22,26 @@ export class UserService {
         }else{
           observable.next(res);
         }
-      })
-    })
+      });
+    });
   }
+
+  register(username:string, password:string, name:string, email:string){
+    return new Observable(observable => {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      this.http.post('/register', JSON.stringify({
+        username: username, password: password, name: name, email: email
+      }), {headers : headers}).map(res => res.json())
+      .subscribe(res => {
+        if(res.code == "404" || res.code == "500"){
+          console.log('Brutal error');
+        }else{
+          observable.next(res);        }
+      });
+    });
+  }
+
   findUser(userId:string){
     return new Observable(observable => {
       let headers = new Headers();
@@ -37,8 +54,8 @@ export class UserService {
         }else{
           observable.next(res);
         }
-      })
-    })
+      });
+    });
   }
   search(query:string){
     return new Observable(observable => {
@@ -102,6 +119,39 @@ export class UserService {
       })
     })
   }
+
+  getFollowers(id){
+    return new Observable(observable => {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("x-access-token", localStorage.getItem("token"));
+      this.http.get('/api/v1/followers/'+id,{headers : headers}).map(res => res.json())
+      .subscribe(res => {
+        if(res.code == "404" || res.code == "500"){
+          console.error('Brutal error');
+        }else{
+          observable.next(res);
+        }
+      })
+    })
+  }
+
+  getFollowings(id){
+    return new Observable(observable => {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("x-access-token", localStorage.getItem("token"));
+      this.http.get('/api/v1/followings/'+id,{headers : headers}).map(res => res.json())
+      .subscribe(res => {
+        if(res.code == "404" || res.code == "500"){
+          console.error('Brutal error');
+        }else{
+          observable.next(res);
+        }
+      })
+    })
+  }
+
   unlike(photoId){
     return new Observable(observable => {
       let headers = new Headers();

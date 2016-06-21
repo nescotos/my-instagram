@@ -17,6 +17,8 @@ var LoginComponent = (function () {
         this.router = router;
         this.username = "";
         this.password = "";
+        this.vPassword = "";
+        this.name = "";
     }
     LoginComponent.prototype.doLogin = function () {
         var _this = this;
@@ -38,6 +40,23 @@ var LoginComponent = (function () {
             }
         }, function (error) {
             alert('Error');
+        });
+    };
+    LoginComponent.prototype.doRegister = function () {
+        var _this = this;
+        this.userService.register(this.username, this.password, this.name, this.email)
+            .subscribe(function (res) {
+            if (res) {
+                //Checking if we have success in operation
+                if (res['success']) {
+                    //Doing login
+                    _this.doLogin();
+                }
+                else {
+                    //Display error
+                    _this.registerError = res['message'];
+                }
+            }
         });
     };
     LoginComponent = __decorate([

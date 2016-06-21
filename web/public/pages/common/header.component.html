@@ -15,8 +15,8 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">My-Gram <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Followers</a></li>
-          <li><a href="#">Following</a></li>
+          <li><a class="clickable-item" [routerLink]="['Followers', {id : id}]">Followers</a></li>
+          <li><a class="clickable-item" [routerLink]="['Followings', {id : id}]">Following</a></li>
           <li><a href="" [routerLink]="['Profile', {userId : id}]">Me</a></li>
           <li class="divider"></li>
           <li><a (click)="doLogout()">Logout</a></li>

@@ -11,7 +11,11 @@ import {Router} from '@angular/router-deprecated';
 export class LoginComponent{
   public username:string = "";
   public password:string = "";
+  public vPassword:string = "";
+  public name:string = "";
   public error:string;
+  public registerError:string;
+  public email:string;
   constructor(public userService : UserService, public router:Router){
 
   }
@@ -34,5 +38,21 @@ export class LoginComponent{
       }, error => {
         alert('Error');
       });
+    }
+
+    doRegister(){
+      this.userService.register(this.username, this.password, this.name, this.email)
+      .subscribe(res => {
+        if(res){
+          //Checking if we have success in operation
+          if(res['success']){
+            //Doing login
+            this.doLogin();
+          }else{
+            //Display error
+            this.registerError = res['message'];
+          }
+        }
+      })
     }
 }

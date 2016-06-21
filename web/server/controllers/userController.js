@@ -64,10 +64,13 @@ module.exports = {
                         message: 'A user with that username already exists. '
                     });
                 else
-                    return res.send(err);
+                    return res.json({
+                        success: false,
+                        message: 'Something goes wrong! Try later. '
+                    });
             }
             //Return a message
-            res.json({
+            res.json({success: true,
                 message: 'User created succesfully.'
             });
         });
@@ -114,6 +117,24 @@ module.exports = {
           res.status(500).json({success : false, message: 'Error, we are sorry'});
         }else{
           res.json(user);
+        }
+      })
+    },
+    getFollowers: function(req, res){
+      User.findById(req.params.id).populate({path: 'followers'}).exec(function(err, user){
+        if(err){
+          res.status(500).json({success: false, message: 'Error, we are sorry, try later'});
+        }else{
+          res.json(user.followers);
+        }
+      })
+    },
+    getFollowings: function(req, res){
+      User.findById(req.params.id).populate({path: 'following'}).exec(function(err, user){
+        if(err){
+          res.status(500).json({success: false, message: 'Error, we are sorry, try later'});
+        }else{
+          res.json(user.following);
         }
       })
     }

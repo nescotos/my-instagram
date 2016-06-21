@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit{
   }
 
   canFollow(){
-    return (this.user['followers'].indexOf(this.userService.getId()) < 0);
+    return (this.user['followers'].indexOf(this.userService.getId()) < 0 && this.user['_id'] != this.userService.getId());
   }
 
   getProfileImageURL(id){

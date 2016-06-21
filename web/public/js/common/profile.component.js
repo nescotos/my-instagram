@@ -46,7 +46,7 @@ var ProfileComponent = (function () {
         });
     };
     ProfileComponent.prototype.canFollow = function () {
-        return (this.user['followers'].indexOf(this.userService.getId()) < 0);
+        return (this.user['followers'].indexOf(this.userService.getId()) < 0 && this.user['_id'] != this.userService.getId());
     };
     ProfileComponent.prototype.getProfileImageURL = function (id) {
         return '/api/v1/profile/' + id + '?token=' + this.userService.getToken();

@@ -35,6 +35,24 @@ var UserService = (function () {
             });
         });
     };
+    UserService.prototype.register = function (username, password, name, email) {
+        var _this = this;
+        return new Observable_1.Observable(function (observable) {
+            var headers = new http_1.Headers();
+            headers.append("Content-Type", "application/json");
+            _this.http.post('/register', JSON.stringify({
+                username: username, password: password, name: name, email: email
+            }), { headers: headers }).map(function (res) { return res.json(); })
+                .subscribe(function (res) {
+                if (res.code == "404" || res.code == "500") {
+                    console.log('Brutal error');
+                }
+                else {
+                    observable.next(res);
+                }
+            });
+        });
+    };
     UserService.prototype.findUser = function (userId) {
         var _this = this;
         return new Observable_1.Observable(function (observable) {
@@ -110,6 +128,40 @@ var UserService = (function () {
             headers.append("Content-Type", "application/json");
             headers.append("x-access-token", localStorage.getItem("token"));
             _this.http.post('/api/v1/photo/like', JSON.stringify({ photoId: photoId }), { headers: headers }).map(function (res) { return res.json(); })
+                .subscribe(function (res) {
+                if (res.code == "404" || res.code == "500") {
+                    console.error('Brutal error');
+                }
+                else {
+                    observable.next(res);
+                }
+            });
+        });
+    };
+    UserService.prototype.getFollowers = function (id) {
+        var _this = this;
+        return new Observable_1.Observable(function (observable) {
+            var headers = new http_1.Headers();
+            headers.append("Content-Type", "application/json");
+            headers.append("x-access-token", localStorage.getItem("token"));
+            _this.http.get('/api/v1/followers/' + id, { headers: headers }).map(function (res) { return res.json(); })
+                .subscribe(function (res) {
+                if (res.code == "404" || res.code == "500") {
+                    console.error('Brutal error');
+                }
+                else {
+                    observable.next(res);
+                }
+            });
+        });
+    };
+    UserService.prototype.getFollowings = function (id) {
+        var _this = this;
+        return new Observable_1.Observable(function (observable) {
+            var headers = new http_1.Headers();
+            headers.append("Content-Type", "application/json");
+            headers.append("x-access-token", localStorage.getItem("token"));
+            _this.http.get('/api/v1/followings/' + id, { headers: headers }).map(function (res) { return res.json(); })
                 .subscribe(function (res) {
                 if (res.code == "404" || res.code == "500") {
                     console.error('Brutal error');

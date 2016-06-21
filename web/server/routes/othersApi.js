@@ -12,6 +12,15 @@ module.exports = function(express){
   .get(function(req, res){
     UserController.findUserById(req, res);
   })
+  //Get followers and followings xD
+  otherApi.route('/followers/:id')
+  .get(function(req, res){
+    UserController.getFollowers(req, res);
+  });
+  otherApi.route('/followings/:id')
+  .get(function(req, res){
+    UserController.getFollowings(req, res);
+  });
 
   return otherApi;
 }
