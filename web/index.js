@@ -5,6 +5,16 @@ var config = require('./config');
 var morgan = require('morgan');
 var socket = require('./server/sockets/masterSocket');
 var app = express();
+var cors = require('cors');
+//Enabling CORS manually
+// app.use(function(req, res, next) {
+// 	res.setHeader('Access-Control-Allow-Origin', '*');
+// 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+// 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+// 	next();
+// });
+//Enabling CORS using cors package
+app.use(cors());
 //To grab data from POST
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));

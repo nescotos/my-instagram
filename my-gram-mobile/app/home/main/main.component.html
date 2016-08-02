@@ -1,0 +1,50 @@
+<!-- <RadSideDrawer #drawer>
+    <template drawerSide>
+        <StackLayout class="sideStackLayout">
+            <StackLayout class="sideTitleStackLayout">
+                <Label text="Navigation Menu"></Label>
+            </StackLayout>
+            <StackLayout class="sideStackLayout">
+                <Label text="My Profile" class="sideLabel" (tap)="utils.redirectTo('/login')"></Label>
+                <Label text="Followers" class="sideLabel" (tap)="utils.redirectTo('/login')"></Label>
+                <Label text="Following" class="sideLabel" (tap)="utils.redirectTo('/login')"></Label>
+                <Label text="Logout" class="sideLabel" (tap)="userService.logout()"></Label>
+            </StackLayout>
+        </StackLayout>
+    </template>
+    <template drawerMain>
+        <StackLayout> -->
+<!-- <RadListView row="1" [items]="getPhotos()">
+                <template listItemTemplate let-item="item">
+                    <StackLayout orientation="vertical">
+                        <Label [text]="item['owner']['username']"></Label>
+                    </StackLayout>
+                </template>
+            </RadListView> -->
+<!-- <Label text="photos[0][0]['_id']"></Label> -->
+<!-- <Button text="Click me to see JSON" (tap)="showPhotos()"></Button> -->
+<!-- <template ngFor #photo [ngForOf]="photos[0]">
+              <StackLayout>
+                Hola
+              </StackLayout>
+            </template>
+        </StackLayout>
+    </template>
+</RadSideDrawer> -->
+<StackLayout>
+    <!-- <ListView [items]="photos" row="1" class="small-spacing">
+        <ActivityIndicator [busy]="loading"></ActivityIndicator>
+        <template let-item="item">
+            <StackLayout>
+                <Label [text]="item['owner']['username']" class="medium-spacing"></Label>
+                <Image src="{{utils.getImageURL(item['_id'])}}"></Image>
+            </StackLayout>
+        </template>
+    </ListView> -->
+
+    <!-- <SegmentedBar row="1" colspan="4" [items]='segmentedBarItems' selectedBackgroundColor="#B76769" [(ngModel)]='selectedIndex'></SegmentedBar> -->
+    <SegmentedBar row="1" colspan="3" class="toggles"
+   selectedBackgroundColor="#B76769"
+  [items]="[{title: 'All'}, {title: 'Active'}]">
+</SegmentedBar>
+</StackLayout>

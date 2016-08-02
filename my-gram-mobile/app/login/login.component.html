@@ -1,0 +1,18 @@
+<StackLayout>
+    <TabView>
+        <StackLayout *tabItem="{title: 'LOGIN'}">
+            <TextField hint="Username" [(ngModel)]="username" autocorrect="false" autocapitalizationType="none"></TextField>
+            <TextField hint="Password" [(ngModel)]="password" secure="true"></TextField>
+            <Button text="LOGIN" (tap)="doLogin()"></Button>
+            <Label [text]="error"></Label>
+        </StackLayout>
+        <StackLayout *tabItem="{title: 'SIGN UP'}">
+          <TextField hint="Name" autocorrect="false" [(ngModel)]="name" autocapitalizationType="none"></TextField>
+          <TextField hint="Username" [(ngModel)]="username" autocorrect="false" autocapitalizationType="none"></TextField>
+          <TextField hint="Email" [(ngModel)]="email" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
+          <TextField hint="Password" [(ngModel)]="password" secure="true"></TextField>
+          <TextField hint="Repeat Password" [(ngModel)]="vPassword" secure="true"></TextField>
+          <Button text="SIGN UP"></Button>
+        </StackLayout>
+    </TabView>
+</StackLayout>
