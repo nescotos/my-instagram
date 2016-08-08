@@ -1,20 +1,21 @@
 <ion-content padding>
-  <ion-card class="list-user">
+  <div *ngIf="selection=='MAIN'">
+  <ion-card class="list-user" *ngFor="let photo of photos">
     <ion-list>
       <ion-item>
      <ion-avatar item-left>
-       <img src="http://www.lcfc.com/images/common/bg_player_profile_default_big.png">
+       <img src="{{util.getProfileImageURL(photo['owner']['_id'])}}">
      </ion-avatar>
-     <h2>Woody</h2>
-     <ion-note item-right>3:43 pm</ion-note>
+     <h2>{{photo['owner']['username']}}</h2>
+     <ion-note item-right>{{photo['createdAt'] | amTimeAgo}}</ion-note>
    </ion-item>
   </ion-list>
 
-    <img src="http://www.freedigitalphotos.net/images/img/homepage/87357.jpg" />
+    <img src="{{util.getFullURL('photo', photo['_id'])}}" />
 
     <ion-card-content>
       <p>
-        The description
+        {{photo['description']}}
       </p>
     </ion-card-content>
 
@@ -22,13 +23,13 @@
       <ion-col>
         <button clear small>
           <ion-icon ios="ios-heart" md="md-heart"></ion-icon>
-          <ion-badge secondary>58</ion-badge>
+          <ion-badge secondary>{{photo['likes'].length}}</ion-badge>
         </button>
       </ion-col>
       <ion-col text-center>
         <button clear small>
           <ion-icon ios="ios-text" md="md-text"></ion-icon>
-          <ion-badge secondary>150</ion-badge>
+          <ion-badge secondary>{{photo['comments'].length}}</ion-badge>
         </button>
       </ion-col>
       <ion-col text-right>
@@ -38,87 +39,11 @@
       </ion-col>
     </ion-row>
   </ion-card>
-  <ion-card class="list-user">
-    <ion-list>
-      <ion-item>
-     <ion-avatar item-left>
-       <img src="http://www.lcfc.com/images/common/bg_player_profile_default_big.png">
-     </ion-avatar>
-     <h2>Woody</h2>
-     <ion-note item-right>3:43 pm</ion-note>
-   </ion-item>
-  </ion-list>
-
-    <img src="http://www.freedigitalphotos.net/images/img/homepage/87357.jpg" />
-
-    <ion-card-content>
-      <p>
-        The description
-      </p>
-    </ion-card-content>
-
-    <ion-row no-padding>
-      <ion-col>
-        <button clear small>
-          <ion-icon ios="ios-heart" md="md-heart"></ion-icon>
-          <ion-badge secondary>58</ion-badge>
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button clear small>
-          <ion-icon ios="ios-text" md="md-text"></ion-icon>
-          <ion-badge secondary>150</ion-badge>
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button clear small dark>
-          <ion-icon ios="ios-expand" md="md-expand"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-card>
-  <ion-card class="list-user">
-    <ion-list>
-      <ion-item>
-     <ion-avatar item-left>
-       <img src="http://www.lcfc.com/images/common/bg_player_profile_default_big.png">
-     </ion-avatar>
-     <h2>Woody</h2>
-     <ion-note item-right>3:43 pm</ion-note>
-   </ion-item>
-  </ion-list>
-
-    <img src="http://www.freedigitalphotos.net/images/img/homepage/87357.jpg" />
-
-    <ion-card-content>
-      <p>
-        The description
-      </p>
-    </ion-card-content>
-
-    <ion-row no-padding>
-      <ion-col>
-        <button clear small>
-          <ion-icon ios="ios-heart" md="md-heart"></ion-icon>
-          <ion-badge secondary>58</ion-badge>
-        </button>
-      </ion-col>
-      <ion-col text-center>
-        <button clear small>
-          <ion-icon ios="ios-text" md="md-text"></ion-icon>
-          <ion-badge secondary>150</ion-badge>
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button clear small dark>
-          <ion-icon ios="ios-expand" md="md-expand"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-card>
-
-
-</ion-content>
+</div>
+<div *ngIf="selection=='PROFILE'">
+  <button secondary block (click)="doLogout()">Logout</button>
+</div>
+  </ion-content>
 <ion-footer>
   <ion-segment [attr.light]="isAndroid ? '' : null">
     <ion-segment-button value="home">
@@ -127,7 +52,7 @@
     <ion-segment-button (click)="getPicture()" value="camera">
       <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
     </ion-segment-button>
-    <ion-segment-button value="profile">
+    <ion-segment-button (click)="selectProfile()" value="profile">
       <ion-icon ios="ios-contact" md="md-contact"></ion-icon>
     </ion-segment-button>
   </ion-segment>
